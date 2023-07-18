@@ -1,0 +1,4 @@
+package com.dia.deliveryfront.product.dto;
+
+public class ProductResponseDto {
+}
