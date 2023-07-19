@@ -12,4 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/orders")
 public class OrderController {
 
+    // 주문 페이지
+    @GetMapping("/save")
+    public String storeAdd() {
+        return "order/orderSave";
+    }
+
 }

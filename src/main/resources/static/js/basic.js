@@ -276,6 +276,10 @@ function getToken() {
     return auth;
 }
 
+function moveMyPage() {
+    window.location.href = host + '/user/mypage';
+}
+
 function updateProfile() {
     window.location.href = host + '/user/profile';
 }

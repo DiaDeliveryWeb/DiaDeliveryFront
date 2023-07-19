@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StoreController {
 
     // 가게 등록 페이지
-    @GetMapping("/add")
+    @GetMapping("/save")
     public String storeAdd() {
-        return "store/storeAdd";
+        return "store/storeSave";
     }
 
 }
