@@ -50,7 +50,7 @@
     }
 
     const host = 'http://' + window.location.host;
-    const oterHost = 'http://localhost:8080';
+    const otherHost = 'http://localhost:8080';
 
     function onLogin() {
         let username = $('#username').val();
@@ -58,24 +58,23 @@
 
         $.ajax({
             type: "POST",
-            url: (oterHost  + `/user/login`),
+            url: (otherHost  + `/users/login`),
             contentType: "application/json",
             data: JSON.stringify({username: username, password: password}),
         })
             .done(function (res, status, xhr) {
+                console.log(res)
+                console.log(xhr)
                 const token = xhr.getResponseHeader('Authorization');
-
+                console.log(token)
                 Cookies.set('Authorization', token, {path: '/'})
-
                 $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
                     jqXHR.setRequestHeader('Authorization', token);
                 });
-
                 window.location.href = host;
             })
             .fail(function (jqXHR, textStatus) {
                 alert("Login Fail");
-                window.location.href = host + '/user/login-page?error'
             });
     }
 </script>

@@ -1,6 +1,6 @@
 const host = 'http://' + window.location.host;
 let targetId;
-
+const otherHost = 'http://localhost:8080';
 $(document).ready(function () {
     const auth = getToken();
     
@@ -15,8 +15,8 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: `/user/user-info`,
-        data: JSON.stringify({auth: auth}),
+        url:(otherHost+"/users/user-info"),
+        // data: JSON.stringify({auth: auth}),
         contentType: 'application/json',
     })
         .done(function (res, status, xhr) {
@@ -24,7 +24,7 @@ $(document).ready(function () {
             const isAdmin = !!res.admin;
 
             if (!username) {
-                
+
                 window.location.href = '/user/login-page';
                 return;
             }
@@ -38,7 +38,7 @@ $(document).ready(function () {
             }
         })
         .fail(function (jqXHR, textStatus) {
-            logout();
+            // logout();
         });
 
     // id 가 query 인 녀석 위에서 엔터를 누르면 execSearch() 함수를 실행하라는 뜻입니다.
