@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/profile.css" />
-  <script src="/js/profile.js"></script>
+  <link rel="stylesheet" href="/css/store.css" />
+  <script src="/js/store.js"></script>
   <title>배달 사이트</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
 
   <!-- Contact -->
   <section id="contact" class="four">
-    <div class="container">
+    <div class="detail-container">
       <header>
         <h2 >가게등록</h2>
         <div></div>
@@ -47,19 +47,24 @@
             <div class="col-6 col-12-mobile" >
               <input type="text" name="name" />
             </div>
-            <div class="off-13"></div><div><h6>Email</h6></div>
-            <div class="col-66 col-12-mobile"><input type="text" name="email"  /></div>
-            <div  class="col-13"><h6>나의 소개</h6></div>
-            <div class="col-12">
-              <textarea name="message" ></textarea>
+            <div class="off-13"></div><div><h6>설명</h6></div>
+            <div class="col-66 col-12-mobile"> <textarea name="desc" ></textarea></div>
+            <div class="off-13"></div><div><h6>카테고리</h6></div>
+            <div class="col-66 col-12-mobile"><input type="text" name="category"  /></div>
+            <div class="off-13"></div><div><h6>주문상품 등록</h6></div>
+            <div class="col-66 col-12-mobile"> <h6>개발중입니다.</h6></div>
+            <div class="row" id="submit-buttons">
+              <div>
+                <button id="store-save-btn" onclick="onWithdrawal()">등록</button>
+              </div>
+              <div>
+                <button id="store-update-btn" onclick="onWithdrawal()">수정</button>
+              </div>
+              <div>
+                <button id="store-delete-btn" onclick="onWithdrawal()">삭제</button>
+              </div>
             </div>
-            <div  class="col-13"><h6>주문내역</h6></div>
-            <div class="aln-left">
-              <input type="submit" value="비밀번호 수정하기" />
-            </div>
-            <div class="off-7">
-              <input type="submit" value="수정하기" />
-            </div>
+
           </div>
           <div style="width:20%;"></div>
         </div>

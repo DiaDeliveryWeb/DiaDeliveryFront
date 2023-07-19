@@ -37,6 +37,11 @@ public class UserController {
     }
 
 
+    @GetMapping("/mypage")
+    public String myPage() {
+        return "user/mypage";
+    }
+
     @GetMapping("/profile")
     public String profilePage() {
         return "user/profile";
