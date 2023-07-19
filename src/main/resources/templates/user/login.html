@@ -50,6 +50,7 @@
     }
 
     const host = 'http://' + window.location.host;
+    const oterHost = 'http://localhost:8080';
 
     function onLogin() {
         let username = $('#username').val();
@@ -57,7 +58,7 @@
 
         $.ajax({
             type: "POST",
-            url: `/user/login`,
+            url: (oterHost  + `/user/login`),
             contentType: "application/json",
             data: JSON.stringify({username: username, password: password}),
         })

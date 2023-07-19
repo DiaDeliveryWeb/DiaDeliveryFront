@@ -16,6 +16,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'GET',
         url: `/user/user-info`,
+        data: JSON.stringify({auth: auth}),
         contentType: 'application/json',
     })
         .done(function (res, status, xhr) {

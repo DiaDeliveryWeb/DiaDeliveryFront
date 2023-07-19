@@ -1,68 +1,62 @@
 package com.dia.deliveryfront.user.service;
 
-import com.dia.deliveryfront.common.jwt.JwtUtil;
-import com.dia.deliveryfront.user.UserRoleEnum;
-import com.dia.deliveryfront.user.dto.SignupRequestDto;
-import com.dia.deliveryfront.user.entity.Users;
-import com.dia.deliveryfront.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.dia.deliveryfront.user.dto.AuthRequestDto;
+import com.dia.deliveryfront.user.dto.SignUpRequestDto;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.UUID;
+import java.net.URI;
 
+@Slf4j
 @Service
-@RequiredArgsConstructor
 public class UserService {
+    private final RestTemplate restTemplate;
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
+    @Value("${server.back.address}") // 백엔드 서버 주소
+    private String serverAddress;
 
-    // ADMIN_TOKEN
-    private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
-    private final String OWNER_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
+    public UserService(RestTemplateBuilder builder) {
+        this.restTemplate = builder.build();
+    }
 
+    public AuthRequestDto signup(SignUpRequestDto requestDto) {
+        // 요청 URL 만들기
+        URI uri = UriComponentsBuilder
+                .fromUriString(serverAddress)
+                .path("/users/signup")
+                .encode()
+                .build()
+                .toUri();
+        ResponseEntity<AuthRequestDto> responseEntity = restTemplate.postForEntity(uri, requestDto, AuthRequestDto.class);
 
-    // 회원가입
+        log.info("statusCode = " + responseEntity.getStatusCode());
 
-    public void signup(SignupRequestDto requestDto) {
-        String username = requestDto.getUsername();
-        String password = passwordEncoder.encode(requestDto.getPassword());
+        return responseEntity.getBody();
 
-        // 회원 중복 확인
-        Optional<Users> checkUsername = userRepository.findByUsername(username);
-        if (checkUsername.isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
-        }
+    }
 
-        // email 중복확인
-        String email = requestDto.getEmail();
-        Optional<Users> checkEmail = userRepository.findByEmail(email);
-        if (checkEmail.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
-        }
+    public AuthRequestDto getUserInfo(String auth) {
+        // 요청 URL 만들기
+        URI uri = UriComponentsBuilder
+                .fromUriString(serverAddress)
+                .path("/users/getUserInfo")
+                .encode()
+                .build()
+                .expand(auth)
+                .toUri();
+        log.info("uri = " + uri);
 
-        // 사용자 ROLE 확인
-        UserRoleEnum role = UserRoleEnum.USER;
-        if (requestDto.isOwner()) {
-            if (!OWNER_TOKEN.equals(requestDto.getOwnerToken())) {
-                throw new IllegalArgumentException("사장님 권한 암호가 틀려 등록이 불가능합니다.");
-            }
-            role = UserRoleEnum.OWNER;
-        }
+        // User user = new User("Robbie", "1234");
 
-        if (requestDto.isAdmin()) {
-            if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
-                throw new IllegalArgumentException("관리자 권한 암호가 틀려 등록이 불가능합니다.");
-            }
-            role = UserRoleEnum.ADMIN;
-        }
+        ResponseEntity<AuthRequestDto> responseEntity = restTemplate.postForEntity(uri, null, AuthRequestDto.class);
 
-        // 사용자 등록
-        Users user = new Users(username, password, email, role);
-        userRepository.save(user);
-    }}
+        log.info("statusCode = " + responseEntity.getStatusCode());
+
+        return responseEntity.getBody();
+    }
+}
