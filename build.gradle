@@ -16,26 +16,26 @@ repositories {
 }
 
 dependencies {
-	// jpa
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	// spring security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+//	// jpa
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	// spring security
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	// thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	// spring-web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// mysql connector
-	runtimeOnly 'com.mysql:mysql-connector-j'
+//	// mysql connector
+//	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	// 테스트
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'org.springframework.security:spring-security-test'
 
 	// JWT
-	compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+//	compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+//	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
 	//json
 	implementation 'org.json:json:20230227'
@@ -45,9 +45,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// 유효성체크
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-
+//	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
