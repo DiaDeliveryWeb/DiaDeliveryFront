@@ -48,10 +48,10 @@
         <!-- 반복문으로 메뉴 아이템 생성 -->
         <div class="menu-item" th:each="item : ${products}" >
           <span name="productId" th:text="${item.id}"></span>
-          <img th:src="${item.imageUrl}" alt="메뉴 이미지">
-          <h3 th:text="${item.productName}"></h3>
-          <p th:text="${item.description}"></p>
-          <span th:text="${item.price}">가격: 10,000원</span>
+          <img name="imageUrl" th:src="${item.imageUrl}" alt="메뉴 이미지">
+          <h3 name="productName" th:text="${item.productName}"></h3>
+          <p name="description" th:text="${item.description}"></p>
+          <span name="price" th:text="${item.price}">가격: 10,000원</span>
           <button class="add-to-cart-button" onclick="addToCart(${item.id})">담기</button>
         </div>
       </div>
@@ -71,8 +71,10 @@
 
       </ul>
     </div>
+    <button class="order-button" onclick="sendCartToApi()">주문하기</button>
 
-</div>
+
+  </div>
 
 
 <!-- Scripts -->
