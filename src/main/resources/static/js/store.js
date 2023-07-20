@@ -79,8 +79,8 @@ function doStoreSave() {
             exit = true;
             return false;
         }
-        if (td.eq(3).find('input').val() == "") {
-            alert('가격을 입력하세요.');
+        if (td.eq(3).find('input').val() == "" || isNaN(td.eq(3).find('input').val())) {
+            alert('숫자 형식으로 가격을 입력하세요.');
             exit = true;
             return false;
         }
@@ -105,7 +105,7 @@ function doStoreSave() {
     formData.append('requestDto', new Blob([ JSON.stringify(store) ], {type : "application/json"}));
     debugger;
     // input class 값
-    var productFileInput = $('[data-input-type="products-upload-control"]');
+    var productFileInput = $('[data-file-type="products-upload"]');
     // fileInput 개수를 구한다.
     for (var i = 0; i < productFileInput.length; i++) {
         if (productFileInput[i].files.length > 0) {
@@ -120,7 +120,7 @@ function doStoreSave() {
     debugger;
     $.ajax({
         type: "POST",
-        url: (host  + `/stores`),
+        url: (otherHost  + `/stores`),
         data: formData,
         contentType: false,               // * 중요 *
         processData: false,               // * 중요 *
@@ -155,7 +155,7 @@ function rowAdd() {
         innerHtml += '<div class="inputFile">';
         innerHtml += '<label for="' + tmpId + '" class="addImgBtn">' + "+";
         innerHtml += '</label>'
-        innerHtml += '<input type="file" id="' + tmpId +'" class="upload-hidden" data-input-type="products-upload-control" accept=".jpg, .png, .gif" multiple />'
+        innerHtml += '<input type="file" id="' + tmpId +'" class="upload-hidden" data-file-type="products-upload" accept=".jpg, .png, .gif" multiple />'
         innerHtml += '<ul id="'+ tmpPreviewId + '" class="sortable"></ul>'
         innerHtml += '</div>';
         innerHtml += '</div>' + '</td>';

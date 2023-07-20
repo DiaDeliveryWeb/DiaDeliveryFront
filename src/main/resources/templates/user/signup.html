@@ -112,7 +112,7 @@
 
             $.ajax({
                 type: "POST",
-                url: (otherHost  + `/users/signup`),
+                url: (otherHost  + `/api/user/signup`),
                 contentType: "application/json",
                 data: JSON.stringify({username: username, password: password, email: email}),
             })
