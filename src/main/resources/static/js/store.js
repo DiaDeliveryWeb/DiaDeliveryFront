@@ -1,26 +1,19 @@
 $(document).ready(function () {
-
-    // This button will increment the value
+    // 행추가
     $('.qty_plus').click(function(e){
-        // Stop acting like a button
         e.preventDefault();
-        // 행추가
         rowAdd();
-
-
     });
-    // This button will decrement the value till 0
+    // 행 삭제
     $(".qty_minus").click(function(e) {
-        // Stop acting like a button
         e.preventDefault();
-        // 행 삭제
         rowDelete();
     });
 });
 
+// 가게 등록
 function doStoreSave() {
-    debugger;
-
+    
     var store = {
         name: "",
         category: "",
@@ -44,8 +37,8 @@ function doStoreSave() {
 
     //FormData 새로운 객체 생성
     var formData = new FormData();
-    //storeImage
-    // input class 값
+
+    // file input class 값
     var storeFileInput = $('#AddImgs');
 
     store.name = $('#st_name').val();
@@ -62,7 +55,7 @@ function doStoreSave() {
         }
     }
     var exit = false;
-    debugger;
+    
     $('#tbProductList tr').each(function() {
         var product = {
             imageUrl: "",
@@ -103,21 +96,21 @@ function doStoreSave() {
 
     // 요청 데이터 전달
     formData.append('requestDto', new Blob([ JSON.stringify(store) ], {type : "application/json"}));
-    debugger;
-    // input class 값
+    
+    // file input class 값
     var productFileInput = $('[data-file-type="products-upload"]');
     // fileInput 개수를 구한다.
     for (var i = 0; i < productFileInput.length; i++) {
         if (productFileInput[i].files.length > 0) {
             for (var j = 0; j < productFileInput[i].files.length; j++) {
-                console.log(" productFileInput[i].files[j] :::"+ productFileInput[i].files[j]);
+                // console.log(" productFileInput[i].files[j] :::"+ productFileInput[i].files[j]);
 
                 // formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.
                 formData.append('productsImage', productFileInput[i].files[j]);
             }
         }
     }
-    debugger;
+    
     $.ajax({
         type: "POST",
         url: (otherHost  + `/stores`),
@@ -142,13 +135,13 @@ function onCancel() {
     return;
 }
 
-
+// 행 추가
 function rowAdd() {
     var trCnt = $('#tbProductList tr').length;
     if (trCnt < 5) {
         var innerHtml = "";
-        var tmpId = "AddImgs_" + (trCnt + 1);
-        var tmpPreviewId = "Preview_" + (trCnt + 1);
+        const tmpId = "AddImgs_" + (trCnt + 1);
+        const tmpPreviewId = "Preview_" + (trCnt + 1);
         innerHtml += '<tr style="font-size:12px; font-weight:400;">';
         innerHtml += '<td style="text-align:center;">' + (trCnt + 1) + '</td>';
         innerHtml += '<td>' + '<div class="fileBox clearfix">';
@@ -171,6 +164,7 @@ function rowAdd() {
     }
 }
 
+// 행 삭제
 function rowDelete() {
     var trCnt = $('#tbProductList tr').length;
     if (trCnt > 1) {

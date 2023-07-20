@@ -14,79 +14,56 @@
     <title>회원가입 페이지</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Pen+Script&display=swap');
-        html{
+
+        html {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size:150%;
-            height:70vh;    /* 보는 사람의 페이지의 크기에 따라 변경됨.*/
+            font-size: 150%;
+            height: 70vh; /* 보는 사람의 페이지의 크기에 따라 변경됨.*/
         }
-        body{
+
+        body {
             font-family: 'Nanum Pen Script', cursive;
             background-color: rgb(229, 229, 229);
-            font-size:25px;
-        }
-        #text{
-            position: relative;
-        }
-        #text input{
-            width: 400px;
-            height: 50px;
-            margin-top : 25px;
-            border: 0;
-            border-top: 2px solid rgb(197, 197, 197);
-            box-shadow: 1px 1px 1px 1px rgb(207, 206, 206);
-            font-family: 'Nanum Pen Script', cursive;
             font-size: 25px;
-            padding: 0 0 0 50px;
         }
-        #text input:focus{
-            outline: none;
-        }
-        #img{
-            position:absolute;
+
+        #img {
+            position: absolute;
             width: 30px;
             height: 30px;
             left: 10px;
             top: 37px;
         }
-        #btn{
+
+        #btn {
             width: 450px;
             height: 50px;
             border: 0;
-            margin-top : 25px;
+            margin-top: 25px;
             background-color: rgb(0, 212, 212);
             font-size: 25px;
-            color:white;
+            color: white;
             font-family: 'Nanum Pen Script', cursive;
         }
-        #btn:active{
-            color:black;
+
+        #btn:active {
+            color: black;
         }
-        #link{
+
+        #link {
             position: absolute;
             right: 25px;
             top: 37px;
             text-decoration-line: none;
             color: rgb(0, 212, 212);
         }
-        #link:visited{
+
+        #link:visited {
             color: rgb(0, 212, 212);
         }
-        #signup-title {
-            width: 303px;
-            height: 32px;
-            /*margin: 56px auto auto auto;*/
-            flex-grow: 0;
-            font-size: 32px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1;
-            letter-spacing: -0.96px;
-            text-align: left;
-            color: #212529;
-        }
+
     </style>
     <script>
         const host = 'http://' + window.location.host;
@@ -99,22 +76,35 @@
             var box = document.getElementById("owner-token");
 
             // If the checkbox is checked, display the output text
-            if (checkBox.checked == true){
+            if (checkBox.checked == true) {
                 box.style.display = "block";
             } else {
                 box.style.display = "none";
             }
         }
+
         function signUp() {
             let username = $('#username').val();
             let password = $('#password').val();
             let email = $('#email').val();
+            let owner = $('#owner-check').is(':checked');
+            let admin = $('#inputCode').val() == "" ? false : true;
+            let adminToken = $('#inputCode').val();
+            let ownerToken = $('#owner-token').val();
 
             $.ajax({
                 type: "POST",
-                url: (otherHost  + `/api/user/signup`),
+                url: (otherHost + `/api/user/signup`),
                 contentType: "application/json",
-                data: JSON.stringify({username: username, password: password, email: email}),
+                data: JSON.stringify({
+                    username: username,
+                    password: password,
+                    email: email,
+                    admin: admin,
+                    owner: owner,
+                    adminToken: adminToken,
+                    ownerToken: ownerToken
+                }),
             })
                 .done(function (res, status, xhr) {
                     window.location.href = host
@@ -126,28 +116,30 @@
     </script>
 </head>
 <body>
-<div id="signup-title">다이아 배달 회원가입</div>
+<div id="signup-form">
+    <div id="signup-title">다이아 배달 회원가입</div>
 
-
-<div id="text">
-    <input type="text" id="username" placeholder="Username">
-</div>
-<div id="text">
-    <input type="password" id="password" placeholder="Password">
-</div>
-<div id="text">
-    <input type="text" id="email" placeholder="Email">
-    <button onclick="sendEmail()"> 인증코드 보내기 </button>
-</div>
-<div id="text">
-    <input type="text" id="inputCode" placeholder="AuthCode">
-</div>
-<div>
-    <input id="owner-check" type="checkbox" name="owner" onclick="onclickOwner()" style="margin-top: 40px;">사장님(판매자)
-    <input id="owner-token" type="password" name="ownerToken" placeholder="사장님 키" class="login-input-box" style="display:none">
-</div>
-<div>
-    <button id="btn" onclick="signUp()">회원가입</button>
+    <div class="signup-desc">
+        <input type="text" id="username" placeholder="Username">
+    </div>
+    <div class="signup-desc">
+        <input type="password" id="password" placeholder="Password">
+    </div>
+    <div class="signup-desc">
+        <input type="text" id="email" placeholder="Email">
+        <button onclick="sendEmail()"> 인증코드 보내기</button>
+    </div>
+    <div class="signup-desc">
+        <input type="text" id="inputCode" placeholder="AuthCode">
+    </div>
+    <div class="signup-owner">
+        <input id="owner-check" type="checkbox" name="owner" onclick="onclickOwner()" style="margin-top: 40px;">사장님(판매자)
+        <input id="owner-token" type="password" name="ownerToken" placeholder="사장님 키" class="login-input-box"
+               style="display:none">
+    </div>
+    <div class="signup-desc">
+        <button id="btn" onclick="signUp()">회원가입</button>
+    </div>
 </div>
 </body>
 </html>
