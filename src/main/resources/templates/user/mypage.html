@@ -32,49 +32,36 @@
     <div class="wrap">
         <div class="summaryContainer">
             <div class="item">
-                <div class="number">354</div>
+                <div class="number" id="scrap"></div>
                 <div>찜한상점</div>
             </div>
             <div class="item">
-                <div class="number">354</div>
-                <div>상품후기</div>
+                <div class="number" id="review"></div>
+                <div>상점후기</div>
             </div>
-            <!--<div class="item">
-                <div class="number">354</div>
-                <div>적립금(BLCT)</div>
-            </div>-->
         </div>
         <div class="shippingStatusContainer">
             <div class="title">
-                주문/배송조회
+                주문조회
             </div>
             <div class="status">
 
                 <div class="item">
                     <div>
-                        <div class="green number">6</div>
-                        <div class="text">장바구니</div>
+                        <div class="number" id="created"></div>
+                        <div class="text">주문생성</div>
                     </div>
-                    <div class="icon"> > </div>
                 </div>
                 <div class="item">
                     <div>
-                        <div class="number">0</div>
+                        <div class="green number" id="done"></div>
                         <div class="text">주문완료</div>
                     </div>
-                    <div class="icon"> > </div>
                 </div>
                 <div class="item">
                     <div>
-                        <div class="green number">1</div>
-                        <div class="text">배송중</div>
-                    </div>
-                    <div class="icon"> > </div>
-                </div>
-                <div class="item">
-                    <div>
-                        <div class="green number">3</div>
-                        <div class="text">구매확정</div>
+                        <div class="green number" id="canceled"></div>
+                        <div class="text">주문취소</div>
                     </div>
                 </div>
 
@@ -86,6 +73,7 @@
             <a href="#" class="item">
             <button id="my-page-btn-profile" onclick="onProfile()">프로필수정</button>
             <button id="my-page-btn-store-save" onclick="onStoreSave()">가게등록</button>
+            </a>
         </div>
     </div>
 
