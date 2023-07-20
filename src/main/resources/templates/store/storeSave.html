@@ -14,7 +14,18 @@
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/store.css" />
+  <link rel="stylesheet" href="/css/imageUploadUi.css">
   <script src="/js/store.js"></script>
+  <script src="/js/imageUpload.js"></script>
+  <!-- Scripts -->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.scrolly.min.js"></script>
+  <script src="/js/jquery.scrollex.min.js"></script>
+  <script src="/js/browser.min.js"></script>
+  <script src="/js/breakpoints.min.js"></script>
+  <script src="/js/util.js"></script>
+  <script src="/js/jquery-ui.js"></script>
+  <link href="/js/jquery-ui.css" rel="stylesheet" type="text/css" />
   <title>배달 사이트</title>
 </head>
 <body>
@@ -41,7 +52,14 @@
           <div style="width:20%;"></div>
           <div style="width:60%;">
             <div class="image" >
-              <img src="https://via.placeholder.com/300.jpg" alt="300 * 300 size image" />
+              <!--html-->
+              <div class="filebox clearfix">
+                <div class="inputFile">
+                  <label for="AddImgs" class="addImgBtn">+</label>
+                  <input type="file" id="AddImgs" class="upload-hidden" accept=".jpg, .png, .gif" multiple>
+                </div>
+                <ul id="Preview" class="sortable"></ul>
+              </div>
             </div>
             <div class="name" ><h6>이름</h6></div>
             <div class="col-6 col-12-mobile" >
@@ -74,16 +92,5 @@
   </section>
 
 </div>
-
-
-<!-- Scripts -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery.scrolly.min.js"></script>
-<script src="/js/jquery.scrollex.min.js"></script>
-<script src="/js/browser.min.js"></script>
-<script src="/js/breakpoints.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/profile.js"></script>
-
 </body>
 </html>
