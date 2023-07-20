@@ -1,89 +1,145 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/store.css" />
-  <script src="/js/store.js"></script>
-  <title>배달 사이트</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/store.css"/>
+    <link rel="stylesheet" href="/css/imageUploadUi.css">
+    <!-- Scripts -->
+    <script src="/js/basic.js"></script>
+    <script src="/js/store.js"></script>
+    <script src="/js/imageUpload.js"></script>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/browser.min.js"></script>
+    <script src="/js/breakpoints.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <link href="/js/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <title>배달 사이트</title>
 </head>
 <body>
 <div class="detail-header" style="position:relative;">
-  <div class="detail_header_div">
-    다이아 배민
-  </div>
-  <a id="login-text" href="javascript:logout()">
-    로그아웃
-  </a>
+    <div class="detail_header_div">
+        다이아 배민
+    </div>
+    <a id="login-text" href="javascript:logout()">
+        로그아웃
+    </a>
 </div>
 <!-- Main -->
 <div id="main">
 
-  <!-- Contact -->
-  <section id="contact" class="four">
-    <div class="detail-container">
-      <header>
-        <h2 >가게등록</h2>
-        <div></div>
-      </header>
-      <form method="post" action="#">
-        <div class="row">
-          <div style="width:20%;"></div>
-          <div style="width:60%;">
-            <div class="image" >
-              <img src="https://via.placeholder.com/300.jpg" alt="300 * 300 size image" />
-            </div>
-            <div class="name" ><h6>이름</h6></div>
-            <div class="col-6 col-12-mobile" >
-              <input type="text" name="name" />
-            </div>
-            <div class="off-13"></div><div><h6>설명</h6></div>
-            <div class="col-66 col-12-mobile"> <textarea name="desc" ></textarea></div>
-            <div class="off-13"></div><div><h6>카테고리</h6></div>
-            <div class="col-66 col-12-mobile"><input type="text" name="category"  /></div>
-            <div class="off-13"></div><div><h6>주문상품 등록</h6></div>
-            <div class="col-66 col-12-mobile"> <h6>개발중입니다.</h6></div>
-            <div class="row" id="submit-buttons">
-              <div>
-                <button id="store-save-btn" onclick="onWithdrawal()">등록</button>
-              </div>
-              <div>
-                <button id="store-update-btn" onclick="onWithdrawal()">수정</button>
-              </div>
-              <div>
-                <button id="store-delete-btn" onclick="onWithdrawal()">삭제</button>
-              </div>
-            </div>
+    <!-- Contact -->
+    <section id="contact" class="four">
+        <div class="detail-container">
+            <header>
+                <h2>가게등록</h2>
+                <div></div>
+            </header>
+            <form method="post" action="#">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="image">
+                            <!--html-->
+                            <div class="fileBox clearfix">
+                                <div class="inputFile">
+                                    이미지 등록 : <label for="AddImgs" class="addImgBtn">+</label>
+                                    <input type="file" id="AddImgs" class="upload-hidden" accept=".jpg, .png, .gif"
+                                           multiple>
+                                </div>
+                                <ul id="Preview" class="sortable"></ul>
+                            </div>
+                        </div>
+                        <div class="name"><h6>이름</h6></div>
+                        <div class="col-6 col-12-mobile">
+                            <input id="st_name" type="text" name="name"/>
+                        </div>
+                        <div><h6>설명</h6></div>
+                        <div><textarea id="st_introduction" name="introduction"></textarea></div>
+                        <div></div>
+                        <div><h6>카테고리</h6></div>
+                        <div><input id="st_category" type="text" name="category" /></div>
+                        <div></div>
+                        <div><h6>주문상품 등록</h6></div>
+                        <div>
+                            <div style="display:inline">
+                              <div style="width:100px;">
+                                <input type="button" value="-" class="qty_minus" field="quantity">
+                                <input type="button" value="+" class="qty_plus" field="quantity">
+                              </div>
+                                <div style="width:1000px;" id="orderProducts">
+                                    <table id="products_table" style="border: solid 1px;">
+                                      <colgroup>
+                                        <col style="width:80px" />
+                                        <col style="width:400px" />
+                                        <col style="width:100px" />
+                                        <col style="width:80px" />
+                                        <col style="width:180px" />
+                                      </colgroup>
+                                      <thead>
+                                        <tr>
+                                            <th>순번</th>
+                                            <th>이미지</th>
+                                            <th>상품이름</th>
+                                            <th>가격</th>
+                                            <th>설명</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbProductList">
+                                        <tr>
+                                          <td style="text-align:center;">
+                                              1
+                                          </td>
+                                            <td>
+                                                <div class="fileBox clearfix">
+                                                    <div class="inputFile">
+                                                        <label for="AddImgs_1" class="addImgBtn">+</label>
+                                                        <input type="file" id="AddImgs_1" class="upload-hidden"
+                                                               data-file-type="products-upload"
+                                                               accept=".jpg, .png, .gif" multiple>
+                                                    </div>
+                                                    <ul id="Preview_1" class="sortable"></ul>
+                                                </div>
+                                            </td>
+                                            <td><input type="text" name="productName" placeholder="상품이름"></td>
+                                            <td><input type="text" name="price" placeholder="가격"></td>
+                                            <td><input type="text" name="description" placeholder="설명"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="submit-buttons">
+                            <div>
+                                <button id="store-save-btn" type="button" onclick="doStoreSave()">등록</button>
+                            </div>
+                            <div>
+                                <button id="store-update-btn" type="button" onclick="onCancel()">취소</button>
+                            </div>
+                        </div>
 
-          </div>
-          <div style="width:20%;"></div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </form>
         </div>
-      </form>
-
-    </div>
-  </section>
+    </section>
 
 </div>
-
-
-<!-- Scripts -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery.scrolly.min.js"></script>
-<script src="/js/jquery.scrollex.min.js"></script>
-<script src="/js/browser.min.js"></script>
-<script src="/js/breakpoints.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/profile.js"></script>
-
 </body>
 </html>

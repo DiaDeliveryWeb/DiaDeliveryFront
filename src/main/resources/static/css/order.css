@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #9fc9cf;
+    padding: 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.header h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 18px;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rating span {
+    font-size: 16px;
+}
+
+.scrap-button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.scrap-button:hover {
+    background-color: #e67e22;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background-color: #9fc9cf63;
+}
+
+.tab-button:not(.active) {
+    background-color: #ddd;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: #9fc9cf63;
+}
+
+.tab-content.active {
+    display: block;
+    background-color: #9fc9cf52;
+}
+.menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.menu-item {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* 추가된 부분 */
+    flex-direction: column; /* 추가된 부분 */
+}
+
+.menu-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px; /* 추가된 부분 */
+}
+
+.menu-item h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.menu-item p {
+    margin-top: 5px;
+}
+
+.menu-item span {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.add-to-cart-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: auto; /* 추가된 부분 */
+}
+
+

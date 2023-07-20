@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -12,9 +12,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/store.css" />
-  <script src="/js/store.js"></script>
+ <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/order.css" />
+  <script src="/js/order.js"></script>
+  <script src="/js/basic.js"></script>
   <title>배달 사이트</title>
 </head>
 <body>
@@ -29,32 +30,52 @@
 <!-- Main -->
 <div id="main">
 
-  <!-- Contact -->
-  <section id="contact" class="four">
-    <div class="detail-container">
-      <header>
-        <h2>주문</h2>
-        <div></div>
-      </header>
-      <form method="post" action="#">
-        <div class="row">
-          <div style="width:20%;"></div>
-          <div style="width:60%;">
-            <div class="image" >
-              <img src="https://via.placeholder.com/300.jpg" alt="300 * 300 size image" />
-              <span>설명</span>
-              <span>가격</span>
-              <span>담기</span>
-            </div>
-          </div>
-          <div style="width:20%;"></div>
-        </div>
-      </form>
-
+  <div class="container">
+    <div class="header">
+      <h1 th:text="${store.name}"></h1>
+      <h2 th:text="${store.introduction}"></h2>
+      <div class="rating">
+        <span>평점: 4.5 / 5</span>
+      </div>
+      <button class="scrap-button">스크랩하기</button>
     </div>
-  </section>
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab('menu')">메뉴</button>
+      <button class="tab-button" onclick="openTab('info')">정보</button>
+      <button class="tab-button" onclick="openTab('review')">리뷰</button>
+    </div>
+    <div class="tab-content active" id="menu">
+      <div class="menu-list">
+        <!-- 반복문으로 메뉴 아이템 생성 -->
+        <div class="menu-item" th:each="item : ${products}" >
+          <span name="productId" th:text="${item.id}"></span>
+          <img name="imageUrl" th:src="${item.imageUrl}" alt="메뉴 이미지">
+          <h3 name="productName" th:text="${item.productName}"></h3>
+          <p name="description" th:text="${item.description}"></p>
+          <span name="price" th:text="${item.price}">가격: 10,000원</span>
+          <button class="add-to-cart-button">담기<button />
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="info">
+      <h2>정보 탭 컨텐츠</h2>
+      <p>정보 내용을 여기에 추가하세요.</p>
+    </div>
+    <div class="tab-content" id="review">
+      <h2>리뷰 탭 컨텐츠</h2>
+      <p>리뷰 내용을 여기에 추가하세요.</p>
+    </div>
+    <div class="cart">
+      <h2>장바구니</h2>
+      <ul id="cart-items">
+        <!-- 여기에 담은 목록이 동적으로 추가될 예정입니다. -->
 
-</div>
+      </ul>
+    </div>
+    <button class="order-button">주문하기</button>
+
+
+  </div>
 
 
 <!-- Scripts -->

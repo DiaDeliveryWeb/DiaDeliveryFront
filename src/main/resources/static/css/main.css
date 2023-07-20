@@ -874,3 +874,62 @@ input[type=submit] {
     font-size: 20px;
     font-weight: bold;
 }
+
+/* 회원가입 */
+#signup-form {
+    width: 800px;
+    height: 710px;
+    margin: 200px auto 141px auto;
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    padding: 56px 0 0;
+    align-items: center;
+}
+
+.signup-desc {
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+.signup-btn {
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+#signup-title {
+    width: 303px;
+    height: 32px;
+    /*margin: 56px auto auto auto;*/
+    flex-grow: 0;
+    font-size: 32px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.signup-desc {
+    position: relative;
+}
+
+.signup-desc input {
+    width: 400px;
+    height: 50px;
+    margin-top: 25px;
+    border: 0;
+    border-top: 2px solid rgb(197, 197, 197);
+    box-shadow: 1px 1px 1px 1px rgb(207, 206, 206);
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 25px;
+    padding: 0 0 0 50px;
+}
+
+.signup-desc input:focus {
+    outline: none;
+}
+.signup-owner {
+    margin-left: 100px;
+}
