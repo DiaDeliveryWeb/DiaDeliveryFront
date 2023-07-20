@@ -1,4 +1,3 @@
-const otherHost = 'http://localhost:8080';
 
 function openTab(tabName) {
     var i, tabContent, tabButtons;
@@ -29,7 +28,12 @@ $(document).ready(function () {
     // Event handler for the "담기" button
     $(".add-to-cart-button").on("click", function () {
         const $menuItem = $(this).closest(".menu-item");
-        const productId = $menuItem.find("span[name='productId']").text();
+        const productIdText = $menuItem.find("span[name='productId']").text();
+
+        // Convert the productIdText to a numeric data type, like an integer or a floating-point number
+        const productId = parseInt(productIdText); // Use parseInt() for an integer or
+        // const productId = parseFloat(productIdText); // Use parseFloat() for a floating-point number
+
         const productName = $menuItem.find("h3[name='productName']").text();
         const price = $menuItem.find("span[name='price']").text();
 
@@ -58,21 +62,31 @@ $(document).ready(function () {
     // Function to send API request with selected product IDs
     function sendCartToApi() {
         if (cartItems.length > 0) {
-            // Extract only the productIds from the cartItems array
+            // Extract only the productIds from the cartItems array and convert them to long integers
             const productIds = cartItems.map(item => item.productId);
 
-            // Implement your API request logic here
-            // You can use jQuery's $.ajax() or $.post() for the AJAX request
-            $.post(otherHost+"/orders", JSON.stringify(productIds))
-                .done(function (data) {
+            // Create the request data object
+            const requestData = {
+                productList: productIds,
+            };
+
+            // Implement your API request logic here using $.ajax() method
+            $.ajax({
+                url: otherHost + "/orders",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(requestData),
+                success: function (data) {
                     // Handle API response if needed
                     console.log("Order placed successfully!");
-                })
-                .fail(function (error) {
+                },
+                error: function (error) {
                     console.error("Error placing order:", error);
-                });
+                },
+            });
         }
     }
+
 
     // Attach click event handler using jQuery
     $(".order-button").on("click", function () {
