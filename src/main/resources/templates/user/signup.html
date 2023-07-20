@@ -91,7 +91,7 @@
     <script>
         const host = 'http://' + window.location.host;
         const otherHost = 'http://localhost:8080';
-
+        let code = "voqnioenqoweikn;aknds;boniak;oknqw;ekn;faoeoj19jt1983htpijghp9283hrp1ij24";
         function onclickOwner() {
             // Get the checkbox
             var checkBox = document.getElementById("owner-check");
@@ -105,23 +105,47 @@
                 box.style.display = "none";
             }
         }
+        function sendEmail(){
+            let email = $('#email').val();
+            $.ajax({
+                type: "POST",
+                url: otherHost + `/email-auth`,
+                contentType: "application/json",
+                data: JSON.stringify({email: email}),
+            }).done(function (res){
+                console.log(res)
+                code = res;
+            }).fail(function (res){
+                alert(res.responseText);
+            })
+        }
         function signUp() {
             let username = $('#username').val();
             let password = $('#password').val();
             let email = $('#email').val();
-
-            $.ajax({
-                type: "POST",
-                url: (otherHost  + `/users/signup`),
-                contentType: "application/json",
-                data: JSON.stringify({username: username, password: password, email: email}),
-            })
-                .done(function (res, status, xhr) {
-                    window.location.href = host
+            let inputCode = $('#inputCode').val();
+            let owner = $("#owner-check").prop("checked");
+            let ownerToken = $('#owner-token').val();
+            if (inputCode === code) {
+                $.ajax({
+                    type: "POST",
+                    url: (otherHost + `/signup`),
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        username: username,
+                        password: password,
+                        email: email,
+                        owner: owner,
+                        ownerToken: ownerToken
+                    }),
                 })
-                .fail(function (jqXHR, textStatus) {
-                    alert("SignUp Fail");
-                });
+                    .done(function (res, status, xhr) {
+                        window.location.href = host
+                    })
+                    .fail(function (res, jqXHR, textStatus) {
+                        alert(res.responseText);
+                    });
+            } else{ alert("인증코드가 일치하지 않습니다.") }
         }
     </script>
 </head>
