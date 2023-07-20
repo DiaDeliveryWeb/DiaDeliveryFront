@@ -1,16 +1,22 @@
 package com.dia.deliveryfront.user.service;
 
+import com.dia.deliveryfront.order.dto.OrderResponseDto;
 import com.dia.deliveryfront.user.dto.AuthRequestDto;
 import com.dia.deliveryfront.user.dto.SignUpRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -60,4 +66,26 @@ public class UserService {
         return responseEntity.getBody();
     }
 
+    public List<OrderResponseDto> findOrder(String token) {
+        URI uri = UriComponentsBuilder
+                .fromUriString(serverAddress)
+                .path("/orders")
+                .encode()
+                .build()
+                .toUri();
+        log.info("uri = " + uri);
+        System.out.println(token);
+        // HttpHeaders 객체 생성
+        HttpHeaders headers = new HttpHeaders();
+        // 토큰 값을 "Authorization" 헤더에 추가
+        headers.set("Authorization", token);
+        ResponseEntity<List<OrderResponseDto>> responseEntity = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                // 헤더를 포함한 HttpEntity 객체 전달
+                new HttpEntity<>(headers),
+                new ParameterizedTypeReference<List<OrderResponseDto>>() {}
+        );
+        return responseEntity.getBody();
+    }
 }

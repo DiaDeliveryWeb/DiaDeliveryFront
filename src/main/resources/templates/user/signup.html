@@ -7,22 +7,90 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <meta charset="UTF-8">
     <title>회원가입 페이지</title>
-    <script>
-        function onclickAdmin() {
-            // Get the checkbox
-            var checkBox = document.getElementById("admin-check");
-            // Get the output text
-            var box = document.getElementById("admin-token");
-
-            // If the checkbox is checked, display the output text
-            if (checkBox.checked == true){
-                box.style.display = "block";
-            } else {
-                box.style.display = "none";
-            }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Pen+Script&display=swap');
+        html{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size:150%;
+            height:70vh;    /* 보는 사람의 페이지의 크기에 따라 변경됨.*/
         }
+        body{
+            font-family: 'Nanum Pen Script', cursive;
+            background-color: rgb(229, 229, 229);
+            font-size:25px;
+        }
+        #text{
+            position: relative;
+        }
+        #text input{
+            width: 400px;
+            height: 50px;
+            margin-top : 25px;
+            border: 0;
+            border-top: 2px solid rgb(197, 197, 197);
+            box-shadow: 1px 1px 1px 1px rgb(207, 206, 206);
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 25px;
+            padding: 0 0 0 50px;
+        }
+        #text input:focus{
+            outline: none;
+        }
+        #img{
+            position:absolute;
+            width: 30px;
+            height: 30px;
+            left: 10px;
+            top: 37px;
+        }
+        #btn{
+            width: 450px;
+            height: 50px;
+            border: 0;
+            margin-top : 25px;
+            background-color: rgb(0, 212, 212);
+            font-size: 25px;
+            color:white;
+            font-family: 'Nanum Pen Script', cursive;
+        }
+        #btn:active{
+            color:black;
+        }
+        #link{
+            position: absolute;
+            right: 25px;
+            top: 37px;
+            text-decoration-line: none;
+            color: rgb(0, 212, 212);
+        }
+        #link:visited{
+            color: rgb(0, 212, 212);
+        }
+        #signup-title {
+            width: 303px;
+            height: 32px;
+            /*margin: 56px auto auto auto;*/
+            flex-grow: 0;
+            font-size: 32px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: -0.96px;
+            text-align: left;
+            color: #212529;
+        }
+    </style>
+    <script>
+        const host = 'http://' + window.location.host;
+        const otherHost = 'http://localhost:8080';
 
         function onclickOwner() {
             // Get the checkbox
@@ -37,32 +105,49 @@
                 box.style.display = "none";
             }
         }
+        function signUp() {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            let email = $('#email').val();
+
+            $.ajax({
+                type: "POST",
+                url: (otherHost  + `/users/signup`),
+                contentType: "application/json",
+                data: JSON.stringify({username: username, password: password, email: email}),
+            })
+                .done(function (res, status, xhr) {
+                    window.location.href = host
+                })
+                .fail(function (jqXHR, textStatus) {
+                    alert("SignUp Fail");
+                });
+        }
     </script>
 </head>
 <body>
-<div id="login-form">
-    <div id="login-title">회원가입 dia 배달</div>
+<div id="signup-title">다이아 배달 회원가입</div>
 
-    <form action="/user/signup" method="post">
-        <div class="login-id-label">사용자명</div>
-        <input type="text" name="username" placeholder="Username" class="login-input-box">
 
-        <div class="login-id-label">비밀번호</div>
-        <input type="password" name="password" class="login-input-box">
-
-        <div class="login-id-label">E-mail</div>
-        <input type="text" name="email" placeholder="E-mail" class="login-input-box">
-
-        <div>
-            <input id="admin-check" type="checkbox" name="admin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
-            <input id="admin-token" type="password" name="adminToken" placeholder="관리자 키" class="login-input-box" style="display:none">
-        </div>
-        <div>
-            <input id="owner-check" type="checkbox" name="owner" onclick="onclickOwner()" style="margin-top: 40px;">사장님(판매자)
-            <input id="owner-token" type="password" name="ownerToken" placeholder="사장님 키" class="login-input-box" style="display:none">
-        </div>
-        <button id="login-id-submit">회원 가입</button>
-    </form>
+<div id="text">
+    <input type="text" id="username" placeholder="Username">
+</div>
+<div id="text">
+    <input type="password" id="password" placeholder="Password">
+</div>
+<div id="text">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="sendEmail()"> 인증코드 보내기 </button>
+</div>
+<div id="text">
+    <input type="text" id="inputCode" placeholder="AuthCode">
+</div>
+<div>
+    <input id="owner-check" type="checkbox" name="owner" onclick="onclickOwner()" style="margin-top: 40px;">사장님(판매자)
+    <input id="owner-token" type="password" name="ownerToken" placeholder="사장님 키" class="login-input-box" style="display:none">
+</div>
+<div>
+    <button id="btn" onclick="signUp()">회원가입</button>
 </div>
 </body>
 </html>

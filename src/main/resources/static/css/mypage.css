@@ -181,3 +181,51 @@ div{
 .infoContainer .item:hover{
     /*   background-color: #f8f8f8; */
 }
+
+/* 카드 형태로 주문 내역을 표시하는 스타일 */
+
+.orderCardOne {
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.orderCardContainer {
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    justify-content: space-between;
+}
+
+.orderCardOne {
+    display: flex;
+    flex-direction: row; /* 가로로 나란히 배치 */
+}
+
+.orderCard {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 20px; /* 선택사항: OrderCard 사이에 간격을 추가 */
+    margin-right: 20px; /* 선택사항: OrderCard 사이에 간격을 추가 */
+}
+
+.orderCard img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.orderCardContent {
+    text-align: center;
+}
+
+/* 글씨 크기를 조정합니다. */
+.orderCard h4 {
+    font-size: 16px;
+}
+
+.orderCard p {
+    font-size: 14px;
+}
+
