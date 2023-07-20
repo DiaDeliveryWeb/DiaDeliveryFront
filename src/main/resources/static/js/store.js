@@ -19,7 +19,7 @@ $(document).ready(function () {
 });
 
 function doStoreSave() {
-
+    debugger;
 
     var store = {
         name: "",
@@ -54,10 +54,14 @@ function doStoreSave() {
 
     for (var i = 0; i < storeFileInput.length; i++) {
         if (storeFileInput[i].files.length > 0) {
-            // formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.
-            formData.append('storeImage', storeFileInput.files[i]);
+            // formData에 'storeImage'이라는 키값으로 storeFileInput 값을 append 시킨다.
+            for (var j = 0; j < storeFileInput[i].files.length; j++) {
+                // formData에 'file'이라는 키값으로 storeFileInput 값을 append 시킨다.
+                formData.append('storeImage', storeFileInput[i].files[j]);
+            }
         }
     }
+    var exit = false;
     debugger;
     $('#tbProductList tr').each(function() {
         var product = {
@@ -70,30 +74,38 @@ function doStoreSave() {
         var td = tr.children();
 
 
-        if (td.eq(3).find('input').val() == "") {
+        if (td.eq(2).find('input').val() == "") {
             alert('상품명을 입력하세요.');
+            exit = true;
+            return false;
+        }
+        if (td.eq(3).find('input').val() == "") {
+            alert('가격을 입력하세요.');
+            exit = true;
             return false;
         }
         if (td.eq(4).find('input').val() == "") {
-            alert('가격을 입력하세요.');
-            return false;
-        }
-        if (td.eq(5).find('input').val() == "") {
             alert('설명을 입력하세요.');
+            exit = true;
             return false;
         }
 
-        product.productName = td.eq(3).find('input').val(); // 상품명
-        product.price = td.eq(4).find('input').val(); // 가격
-        product.description = td.eq(5).find('input').val(); // 설명
-
+        product.productName = td.eq(2).find('input').val(); // 상품명
+        product.price = td.eq(3).find('input').val(); // 가격
+        product.description = td.eq(4).find('input').val(); // 설명
+        product.imageUrl = "/";
         store.productList.push(product);
     });
+
+    if (exit) {
+        return false;
+    }
+
     // 요청 데이터 전달
     formData.append('requestDto', new Blob([ JSON.stringify(store) ], {type : "application/json"}));
     debugger;
     // input class 값
-    var productFileInput = $('.products-upload-control');
+    var productFileInput = $('[data-input-type="products-upload-control"]');
     // fileInput 개수를 구한다.
     for (var i = 0; i < productFileInput.length; i++) {
         if (productFileInput[i].files.length > 0) {
@@ -101,14 +113,14 @@ function doStoreSave() {
                 console.log(" productFileInput[i].files[j] :::"+ productFileInput[i].files[j]);
 
                 // formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.
-                formData.append('productsImage', $('.products-upload-control')[i].files[j]);
+                formData.append('productsImage', productFileInput[i].files[j]);
             }
         }
     }
     debugger;
     $.ajax({
         type: "POST",
-        url: (otherHost  + `/stores`),
+        url: (host  + `/stores`),
         data: formData,
         contentType: false,               // * 중요 *
         processData: false,               // * 중요 *
@@ -143,7 +155,7 @@ function rowAdd() {
         innerHtml += '<div class="inputFile">';
         innerHtml += '<label for="' + tmpId + '" class="addImgBtn">' + "+";
         innerHtml += '</label>'
-        innerHtml += '<input type="file" id="' + tmpId +'" class="upload-hidden products-upload-control" accept=".jpg, .png, .gif" multiple />'
+        innerHtml += '<input type="file" id="' + tmpId +'" class="upload-hidden" data-input-type="products-upload-control" accept=".jpg, .png, .gif" multiple />'
         innerHtml += '<ul id="'+ tmpPreviewId + '" class="sortable"></ul>'
         innerHtml += '</div>';
         innerHtml += '</div>' + '</td>';
