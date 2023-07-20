@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/mypage.css" />
+    <script src="/js/basic.js"></script>
     <script src="/js/mypage.js"></script>
     <title>배달 사이트</title>
 </head>
@@ -22,13 +23,6 @@
     <div class="detail_header_div">
         다이아 배민
     </div>
-    <!--headr-->
-    <!--    <div id="header-title-login-user">
-            <span id="username"></span> 님의
-        </div>-->
-    <!--   <div id="header-title-select-shop">
-           Select Shop
-       </div>-->
     <a id="login-text" href="javascript:logout()">
         로그아웃
     </a>
@@ -87,32 +81,9 @@
             </div>
 
         </div>
+        <div id="orderDataContainer"></div>
         <div class="listContainer">
             <a href="#" class="item">
-                <div class="icon">ii</div>
-                <div class="text">주문내역<span class="circle"></span></div>
-                <div class="right"> > </div>
-            </a>
-           <!-- <a href="#" class="item">
-                <div class="icon">ii</div>
-                <div class="text">가게등록</div>
-                <div class="right"> > </div>
-            </a>-->
-            <!--<a href="#" class="item">
-                <div class="icon">ii</div>
-                <div class="text">상품문의</div>
-                <div class="right"> > </div>
-            </a>
-            <a href="#" class="item">
-                <div class="icon">ii</div>
-                <div class="text">단골상점</div>
-                <div class="right"> > </div>
-            </a>-->
-            <a href="#" class="item">
-                <div class="icon">ii</div>
-                <div class="text">찜한상품</div>
-                <div class="right"> > </div>
-            </a>
             <button id="my-page-btn-profile" onclick="onProfile()">프로필수정</button>
             <button id="my-page-btn-store-save" onclick="onStoreSave()">가게등록</button>
         </div>

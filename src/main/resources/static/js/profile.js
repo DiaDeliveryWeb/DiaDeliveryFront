@@ -1,4 +1,3 @@
-const host = 'http://' + window.location.host;
 
 function onWithdrawal() {
     alert('회원탈퇴');

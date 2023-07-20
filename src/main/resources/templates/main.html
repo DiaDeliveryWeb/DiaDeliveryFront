@@ -17,18 +17,90 @@
     <script src="/js/main.js"></script>
     <title>배달 사이트</title>
 </head>
+<style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #see-area {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    #store {
+        margin: 10px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+    }
+
+    img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .nav {
+        text-align: center;
+        padding: 10px;
+        background-color: #f5f5f5;
+    }
+
+    .nav-see {
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /*.active {*/
+    /*    background-color: #007bff;*/
+    /*    color: #fff;*/
+    /*}*/
+    /* <a> 태그가 마우스 호버되지 않거나 방문하지 않은 상태일 때 스타일 적용 */
+    a {
+        text-decoration: none; /* 밑줄 제거 */
+        color: inherit; /* 부모 요소의 텍스트 색상을 상속 */
+    }
+
+    /* <a> 태그가 마우스에 호버될 때 스타일 적용 */
+    a:hover {
+        text-decoration: underline; /* 밑줄 추가 */
+        color: #007bff; /* 원하는 색상으로 변경 (파란색: #007bff) */
+    }
+    #divCategories {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        border-color: #007bff; /* 원하는 테두리 색상으로 변경 (파란색: #007bff) */
+    }
+</style>
 <body>
 <div class="header" style="position:relative;">
     <div>
         다이아 배민
     </div>
-    <!--headr-->
-<!--    <div id="header-title-login-user">
-        <span id="username"></span> 님의
-    </div>-->
- <!--   <div id="header-title-select-shop">
-        Select Shop
-    </div>-->
     <span id="login-user-greet-text">
         <span id="username"></span> 님
     </span>
@@ -38,46 +110,29 @@
     <a id="login-text" href="javascript:logout()">
         로그아웃
     </a>
-    <!--/headr-->
 </div>
+
 <div class="nav">
     <div class="nav-see active">
         카테고리
         <div id="divCategories">
-
         </div>
     </div>
 </div>
 <div id="see-area">
-        <div><h1>피자</h1></div>
-        <div>
-            <ul>
-                <li>
-                    <span>사진</span>
-                    <span>미스터피자</span>
-                    <span>4.8</span>
-                    <span>리뷰 83</span>
-                </li>
-                <li>
-                    <span>사진</span>
-                    <span>미스터피자</span>
-                    <span>4.8</span>
-                    <span>리뷰 83</span>
-                </li>
-                <li>
-                    <span>사진</span>
-                    <span>미스터피자</span>
-                    <span>4.8</span>
-                    <span>리뷰 83</span>
-                </li>
-                <li>
-                    <span>사진</span>
-                    <span>미스터피자</span>
-                    <span>4.8</span>
-                    <span>리뷰 83</span>
-                </li>
-            </ul>
-        </div>
+    <ul>
+        <!-- storeList를 순회하며 각 가게의 정보를 출력 -->
+        <th:block th:each="store : ${storeList}">
+            <div id="store">
+                <a th:href="@{'/orders/save?name=' + ${store.name}}">
+                    <li><img th:src="${store.imageUrl}" alt="Store Image"></li>
+                    <li th:text="${store.introduction}"></li>
+                    <li th:text="${store.name}"></li>
+                    <li th:text="${store.category}"></li>
+                </a>
+            </div>
+        </th:block>
+    </ul>
 </div>
 
 <input type="hidden" id="admin"/>
