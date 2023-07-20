@@ -1,4 +1,4 @@
-.filebox input[type="file"] {
+.fileBox input[type="file"] {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -8,7 +8,7 @@
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
-.filebox label {
+.fileBox label {
     display: inline-block;
     text-align: center;
     width: 90px;
@@ -19,7 +19,7 @@
     font-size: 12px;
     color: #fff;
 }
-.filebox .upload-name {
+.fileBox .upload-name {
     display: inline-block;
     padding: .5em .75em;
     font-size: 12px;
@@ -34,7 +34,7 @@
 .inputFile,
 #Preview,
 #Preview li{
-    float:left
+    float:left;
 }
 .inputFile{
     margin-bottom: 10px;
@@ -52,7 +52,7 @@
 
 #Preview{
     margin-left: 20px;
-    width: 650px;
+    width: 400px;
     white-space: nowrap;
 }
 #Preview li{
@@ -75,4 +75,9 @@
     display: inline-block;
     text-align: center;
     cursor: pointer;
+}
+
+/* 불필요한 . 마크 제거 */
+li::marker {
+    content: '';
 }
