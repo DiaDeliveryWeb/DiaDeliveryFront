@@ -22,9 +22,47 @@ function openTab(tabName) {
     event.currentTarget.classList.add("active");
 }
 
-function getProductList() {
-    fetch(otherHost+"/data") // API 요청 URL을 입력합니다.
-        .then(response => response.json())
-        .then(data => displayData(data))
-        .catch(error => console.error("데이터를 가져오는데 오류가 발생했습니다.", error));
-}
+
+$(document).ready(function () {
+    // jQuery to handle the cart functionality
+    const cartItems = [];
+
+    // Event handler for the "담기" button
+    $(".add-to-cart-button").on("click", function () {
+        const productId = $(this).siblings("span[name='productId']").text();
+        addToCart(productId);
+    });
+
+    function addToCart(productId) {
+        cartItems.push(productId);
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartList = $("#cart-items");
+        cartList.empty(); // Clear previous cart items
+
+        cartItems.forEach(productId => {
+            const li = $("<li>").text(productId);
+            cartList.append(li);
+        });
+    }
+
+    // Function to send API request with selected product IDs
+    function sendCartToApi() {
+        if (cartItems.length > 0) {
+            // Implement your API request logic here
+            // You can use jQuery's $.ajax() or $.post() for the AJAX request
+            $.post("YOUR_API_ENDPOINT", JSON.stringify(cartItems))
+                .done(function (data) {
+                    // Handle API response if needed
+                })
+                .fail(function (error) {
+                    console.error("Error sending cart data to API:", error);
+                });
+        }
+    }
+
+    // Add other functions or code relevant to the order page here
+
+});

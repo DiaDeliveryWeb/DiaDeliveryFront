@@ -44,10 +44,16 @@
       <button class="tab-button" onclick="openTab('review')">리뷰</button>
     </div>
     <div class="tab-content active" id="menu">
-      <h2>메뉴 탭 컨텐츠</h2>
-      <div th:each="item : ${products}">
-        <h2 th:text="${item.productName}"></h2>
-<!--        <p th:text="${item.description}"></p>-->
+      <div class="menu-list">
+        <!-- 반복문으로 메뉴 아이템 생성 -->
+        <div class="menu-item" th:each="item : ${products}" >
+          <span name="productId" th:text="${item.id}"></span>
+          <img th:src="${item.imageUrl}" alt="메뉴 이미지">
+          <h3 th:text="${item.productName}"></h3>
+          <p th:text="${item.description}"></p>
+          <span th:text="${item.price}">가격: 10,000원</span>
+          <button class="add-to-cart-button" onclick="addToCart(${item.id})">담기</button>
+        </div>
       </div>
     </div>
     <div class="tab-content" id="info">
@@ -58,7 +64,13 @@
       <h2>리뷰 탭 컨텐츠</h2>
       <p>리뷰 내용을 여기에 추가하세요.</p>
     </div>
-  </div>
+    <div class="cart">
+      <h2>장바구니</h2>
+      <ul id="cart-items">
+        <!-- 여기에 담은 목록이 동적으로 추가될 예정입니다. -->
+
+      </ul>
+    </div>
 
 </div>
 
