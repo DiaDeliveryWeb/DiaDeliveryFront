@@ -1,5 +1,7 @@
 package com.dia.deliveryfront.user.controller;
 
+import com.dia.deliveryfront.product.dto.ProductResponseDto;
+import com.dia.deliveryfront.product.service.ProductService;
 import com.dia.deliveryfront.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     private final UserService userService;
-
     @GetMapping("/login-page")
     public String loginPage() {
         return "user/login";
@@ -31,6 +33,12 @@ public class UserController {
     public String myPage() {
         return "user/mypage";
     }
+
+    @GetMapping("/mystore")
+    public String myStore() {
+        return "user/myStore";
+    }
+
 
     @GetMapping("/profile")
     public String profilePage(Model model) {

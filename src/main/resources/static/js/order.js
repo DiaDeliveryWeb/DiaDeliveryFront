@@ -92,8 +92,9 @@ $(document).ready(function () {
                 contentType: "application/json",
                 data: JSON.stringify(requestData),
                 success: function (data) {
-                    // Handle API response if needed
+                    alert("주문 생성 완료")
                     console.log("Order placed successfully!");
+                    window.location.reload()
                 },
                 error: function (res, error) {
                     alert(res.responseText);
