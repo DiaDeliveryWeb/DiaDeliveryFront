@@ -33,7 +33,7 @@ function getOrders() {
             displayOrderData(res)
         })
         .fail(function (res, jqXHR, textStatus) {
-            alert(res.responseText);
+            alert(res.responseJSON.msg);
         });
 }
 
@@ -132,7 +132,7 @@ function acceptOrder(orderNum){
             window.location.href = host + "/user/mypage";
         })
         .fail(function (res) {
-            alert(res.responseText);
+            alert(res.responseJSON.msg);
         });
 }
 
@@ -146,7 +146,7 @@ function cancelOrder(orderNum){
             window.location.href = host + "/user/mypage";
         })
         .fail(function (res) {
-            alert(res.responseText);
+            alert(res.responseJSON.msg);
         });
 }
 function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt){

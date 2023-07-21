@@ -115,7 +115,7 @@
                 console.log(res)
                 code = res;
             }).fail(function (res){
-                alert(res.responseText);
+                alert(res.responseJSON.msg);
             })
         }
         function signUp() {
@@ -142,7 +142,7 @@
                         window.location.href = host
                     })
                     .fail(function (res, jqXHR, textStatus) {
-                        alert(res.responseText);
+                        alert(res.responseJSON.msg);
                     });
             } else{ alert("인증코드가 일치하지 않습니다.") }
         }
