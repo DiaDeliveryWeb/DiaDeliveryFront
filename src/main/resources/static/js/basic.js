@@ -1,9 +1,12 @@
 const host = 'http://' + window.location.host;
 let targetId;
 const otherHost = 'http://localhost:8080';
+let role;
+let reviewNum;
+let scrapNum;
+let isOwner;
 $(document).ready(function () {
     const auth = getToken();
-    
     if (auth !== undefined && auth !== '') {
         $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
             jqXHR.setRequestHeader('Authorization', auth);
@@ -21,21 +24,28 @@ $(document).ready(function () {
     })
         .done(function (res, status, xhr) {
             const username = res.username;
-            const isAdmin = !!res.admin;
+            isOwner = res.owner;
+            if (isOwner){
+                role = "OWNER"
+            } else {
+                role = "USER"
+            }
+            reviewNum = res.reviewNum;
+            scrapNum = res.scrapNum;
+            console.log(reviewNum,scrapNum, isOwner, role)
 
             if (!username) {
 
-                window.location.href = '/user/login-page';
+                window.location.href = '/user/login';
                 return;
             }
-
             $('#username').text(username);
-            if (isAdmin) {
-                $('#admin').text(true);
-                // showProduct(true);
-            } else {
-                // showProduct();
-            }
+            // if (isAdmin) {
+            //     $('#admin').text(true);
+            //     // showProduct(true);
+            // } else {
+            //     // showProduct();
+            // }
         })
         .fail(function (jqXHR, textStatus) {
             // logout();

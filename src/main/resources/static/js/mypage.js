@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     const auth = getToken();
     if (auth !== undefined && auth !== '') {
@@ -25,8 +26,8 @@ function getOrders() {
         .done(function (res, status, xhr) {
             displayOrderData(res)
         })
-        .fail(function (jqXHR, textStatus) {
-            alert("Fail To Get Orders Info");
+        .fail(function (res, jqXHR, textStatus) {
+            alert(res.responseText);
         });
 }
 
@@ -39,6 +40,9 @@ function onStoreSave() {
 }
 
 function displayOrderData(orderData) {
+    let createdOrderCnt = 0;
+    let doneOrderCnt = 0;
+    let canceledOrderCnt= 0;
     // HTML 문자열로 데이터를 구성합니다.
     let htmlContent = '';
     console.log(orderData)
@@ -48,16 +52,33 @@ function displayOrderData(orderData) {
         let productResponseDtos = order.productResponseDtos;
         let storeName = order.storeName;
         let username = order.username;
+        let orderNum = order.orderNum;
         let totalPrice = 0;
+        if (orderStatus === '주문생성'){
+            createdOrderCnt += 1;
+        } else if(orderStatus === '주문완료'){
+            doneOrderCnt += 1;
+        } else{
+            canceledOrderCnt += 1;
+        }
+        let scrapElement = document.getElementById('scrap');
+        scrapElement.innerText = scrapNum;
+        let reviewElement = document.getElementById('review');
+        reviewElement.innerText = reviewNum;
 
         htmlContent += `<div class="orderCardOne">
             <div>
             <h2>주문 상태: ${orderStatus}</h2>
             <h3>가게 이름: ${storeName}</h3>
             <h3>사용자 이름: ${username}</h3>
+            <a href="/orders?orderNum=${orderNum}" class="order-link">
+                <h3 class="order-number">주문 번호: ${orderNum}</h3>
+            </a>
             </div>
-            <button id="accept-order">주문 수락</button>
-            <button id="cancle-order">주문 취소</button>
+            <!-- 버튼을 role이 "owner"일 때만 보이도록 설정합니다. -->
+            <button id="accept-order" onclick="acceptOrder('${orderNum}')" style="display: ${role === 'OWNER' && orderStatus === '주문생성' ? 'block' : 'none'}">주문 수락</button>
+
+            <button id="cancel-order" onclick="cancelOrder('${orderNum}')" style="display: ${orderStatus === '주문생성' ? 'block' : 'none'}">주문 취소</button>
             <h3>주문 내역:</h3>
             <div class="orderCardContainer">
         `;
@@ -92,4 +113,42 @@ function displayOrderData(orderData) {
     // HTML 컨테이너에 데이터를 삽입합니다.
     let orderDataContainer = document.getElementById('orderDataContainer');
     orderDataContainer.innerHTML = htmlContent;
+    orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt);
 }
+
+function acceptOrder(orderNum){
+    $.ajax({
+        type: "PUT",
+        url: (otherHost  + `/orders?orderNum=` + orderNum),
+        contentType: "application/json"
+    })
+        .done(function (res, status, xhr) {
+            window.location.href = host + "/user/mypage";
+        })
+        .fail(function (res) {
+            alert(res.responseText);
+        });
+}
+
+function cancelOrder(orderNum){
+    $.ajax({
+        type: "DELETE",
+        url: (otherHost  + `/orders?orderNum=` + orderNum),
+        contentType: "application/json"
+    })
+        .done(function (res, status, xhr) {
+            window.location.href = host + "/user/mypage";
+        })
+        .fail(function (res) {
+            alert(res.responseText);
+        });
+}
+function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt){
+    let createdElement = document.getElementById('created');
+    createdElement.innerText = createdOrderCnt;
+    let doneElement = document.getElementById('done');
+    doneElement.innerText = doneOrderCnt;
+    let canceledElement = document.getElementById('canceled');
+    canceledElement.innerText = canceledOrderCnt;
+}
+
