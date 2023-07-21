@@ -80,7 +80,7 @@ function editProfile() {
             window.location.reload();
         },
         error: function(xhr, status, error) {
-            alert(xhr.responseJSON.errorMsg);
+            alert(xhr.responseJSON.msg);
             window.location.reload();
         }
     });
@@ -100,7 +100,8 @@ function onWithdrawal() {
             window.location.href = host + '/user/login-page';
         },
         error: function(xhr, status, error) {
-            alert("오류")
+            alert(xhr.responseJSON.msg);
+            window.location.reload();
         }
     });
 }
