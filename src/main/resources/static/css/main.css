@@ -224,15 +224,15 @@ input#query::placeholder {
     box-sizing: border-box;
     background-color: #15aabf;
     color: white;
-    text-align: center;
     padding-top: 80px;
+    text-align: center;
     /*padding: 50px;*/
     font-size: 45px;
     font-weight: bold;
 }
 
 .detail-header {
-    height: 100px;
+    height: 250px;
     box-sizing: border-box;
     background-color: #15aabf;
     color: white;
@@ -547,6 +547,22 @@ input#query::placeholder {
     color: #ffffff;
 }
 
+#history-back-text {
+    position:absolute;
+    top:48px;
+    left:140px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+}
+
 #login-user-greet-text {
     position:absolute;
     top:48px;
@@ -577,6 +593,27 @@ input#query::placeholder {
     letter-spacing: 0.36px;
     text-align: center;
     color: #ffffff;
+}
+
+#logo-left {
+    position:absolute;
+    top:30px;
+    left:240px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#logo-left img {
+    width: 120px;
+    height: 90px;
 }
 
 @media ( max-width: 768px ) {

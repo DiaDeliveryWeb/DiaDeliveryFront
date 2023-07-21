@@ -7,6 +7,12 @@ $(document).ready(function () {
         });
     }
     getOrders();
+
+
+    $("#myStores").click(function() {
+        moveMyStoresPage();
+    });
+
 })
 
 function getToken() {
@@ -152,3 +158,7 @@ function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt){
     canceledElement.innerText = canceledOrderCnt;
 }
 
+
+function moveMyStoresPage() {
+    window.location.href = host + '/stores/mystoreslist';
+}
