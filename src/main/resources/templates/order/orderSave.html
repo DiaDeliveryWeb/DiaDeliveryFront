@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"
           integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <script src="/js/js.cookie.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -19,17 +19,29 @@
   <title>배달 사이트</title>
 </head>
 <body>
-<div class="detail-header" style="position:relative;">
-  <div class="detail_header_div">
+<div class="header" style="position:relative;">
+  <div>
     다이아 배민
   </div>
+  <span id="history-back-text">
+        <a href="javascript:window.history.back();" style="font-size: 40px;">⬅</a>
+    </span>
+  <span id="logo-left" style="cursor: pointer;">
+       <img src="/images/logo.png" />
+    </span>
+  <span id="login-user-greet-text">
+        <span id="username"></span> 님
+    </span>
+  <a id="my-page-text" href="javascript:moveMyPage()">
+    마이페이지
+  </a>
   <a id="login-text" href="javascript:logout()">
     로그아웃
   </a>
 </div>
+
 <!-- Main -->
 <div id="main">
-
   <div class="container">
     <div class="header">
       <h1 th:text="${store.name}"></h1>

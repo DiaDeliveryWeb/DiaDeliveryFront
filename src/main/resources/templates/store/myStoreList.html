@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/js.cookie.min.js"></script>
+    <script src="/js/basic.js" defer></script>
+    <script src="/js/myStoreList.js" defer></script>
+</head>
+<body>
+<div class="header" style="position:relative;">
+    <div>
+        다이아 배민
+    </div>
+    <span id="history-back-text">
+        <a href="javascript:window.history.back();" style="font-size: 40px;">⬅</a>
+    </span>
+    <span id="logo-left" style="cursor: pointer;">
+       <img src="/images/logo.png" />
+    </span>
+    <span id="login-user-greet-text">
+        <span id="username"></span> 님
+    </span>
+    <a id="my-page-text" href="javascript:moveMyPage()">
+        마이페이지
+    </a>
+    <a id="login-text" href="javascript:logout()">
+        로그아웃
+    </a>
+</div>
+
+<div>
+    <table id="stores_table" class="table">
+        <colgroup>
+            <col style="width:80px"/>
+            <col style="width:400px"/>
+            <col style="width:100px"/>
+            <col style="width:80px"/>
+            <col style="width:180px"/>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>이미지</th>
+                <th>제목</th>
+                <th>카테고리</th>
+                <th>설명</th>
+            </tr>
+        </thead>
+        <tbody id="tbMyStoreList">
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

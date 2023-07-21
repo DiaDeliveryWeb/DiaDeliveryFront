@@ -40,6 +40,7 @@ $(document).ready(function () {
                 return;
             }
             $('#username').text(username);
+            
             // if (isAdmin) {
             //     $('#admin').text(true);
             //     // showProduct(true);
@@ -76,10 +77,15 @@ $(document).ready(function () {
 
         $('#see-area').hide();
         $('#search-area').show();
-    })
+    });
 
     $('#see-area').show();
     $('#search-area').hide();
+
+    // 홈화면이동
+    $('#logo-left').on('click', function () {
+        window.location.href = host;
+    });
 })
 
 function numberWithCommas(x) {
