@@ -1,0 +1,31 @@
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+
+    width:50%;
+    text-align: center;
+}
+.co-body {
+    display: inline-block;
+}
+#my-page-btn-submit {
+    width: 86px;
+    height: 41px;
+    cursor: pointer;
+    border-width: 0px;
+    background-color: dodgerblue;
+    color: #fff;
+    margin-top: 10px;
+}
+#my-page-btn-withdrawal {
+    width: 86px;
+    height: 41px;
+    cursor: pointer;
+    border-width: 0px;
+    background-color: dodgerblue;
+    color: #fff;
+    margin-top: 10px;
+}
