@@ -39,6 +39,21 @@ $(document).ready(function () {
 
         addToCart(productId, productName, price);
     });
+    $("#starRating i").on("click", function () {
+        let rating = $(this).data("rating");
+        let stars = $("#starRating i");
+
+        // 선택한 별과 그 앞에 있는 별들까지 채워지도록 처리
+        stars.each(function (index) {
+            if (index < rating) {
+                $(this).removeClass("far").addClass("fas");
+            } else {
+                $(this).removeClass("fas").addClass("far");
+            }
+        });
+
+        $("#reviewRating").val(rating);
+    });
 
     function addToCart(productId, productName, price) {
         cartItems.push({
@@ -80,7 +95,8 @@ $(document).ready(function () {
                     // Handle API response if needed
                     console.log("Order placed successfully!");
                 },
-                error: function (error) {
+                error: function (res, error) {
+                    alert(res.responseText);
                     console.error("Error placing order:", error);
                 },
             });
@@ -96,3 +112,31 @@ $(document).ready(function () {
     // Add other functions or code relevant to the order page here
 
 });
+
+function submitReview() {
+    // 작성한 리뷰 데이터를 FormData 객체로 생성하여 서버로 전송
+    let formData = new FormData();
+    let image = $("#reviewImage")[0].files[0];
+    let content = $("#reviewContent").val();
+    let rate = $("#reviewRating").val();
+
+    formData.append("image", image);
+    formData.append("content", content);
+    formData.append("rate", rate);
+
+    $.ajax({
+        type: "POST",
+        url: "/api/reviews", // 리뷰 저장 API 엔드포인트 주소
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // 리뷰 저장 성공 시 화면 갱신 등 추가 작업 수행
+            alert("리뷰가 작성되었습니다.");
+            // 화면 갱신을 위한 코드 추가
+        },
+        error: function(error) {
+            alert("리뷰 작성에 실패했습니다.");
+        }
+    });
+}

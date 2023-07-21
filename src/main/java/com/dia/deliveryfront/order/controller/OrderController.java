@@ -1,5 +1,6 @@
 package com.dia.deliveryfront.order.controller;
 
+import com.dia.deliveryfront.order.dto.OrderResponseDto;
 import com.dia.deliveryfront.order.service.OrderService;
 import com.dia.deliveryfront.product.dto.ProductRequestDto;
 import com.dia.deliveryfront.product.dto.ProductResponseDto;
@@ -24,7 +25,7 @@ public class OrderController {
     private final OrderService orderService;
     // 주문 페이지
     @GetMapping("/save")
-    public String storeAdd(@RequestParam String name, Model model) {
+    public String storeAndOrder(@RequestParam String name, Model model) {
         StoreOneResponseDto storeOneResponseDto = orderService.getStore(name);
         List<ReviewResponseDto> reviewResponseDtos = storeOneResponseDto.getReviewsList();
         List<ProductResponseDto> productResponseDtos = storeOneResponseDto.getProductResponseDtoList();
@@ -34,4 +35,8 @@ public class OrderController {
         return "order/orderSave";
     }
 
+    @GetMapping
+    public String detailOrder(@RequestParam String orderNum) {
+        return "order/detailOrder";
+    }
 }

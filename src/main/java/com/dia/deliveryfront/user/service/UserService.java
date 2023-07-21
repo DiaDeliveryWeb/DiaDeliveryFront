@@ -66,26 +66,5 @@ public class UserService {
         return responseEntity.getBody();
     }
 
-    public List<OrderResponseDto> findOrder(String token) {
-        URI uri = UriComponentsBuilder
-                .fromUriString(serverAddress)
-                .path("/orders")
-                .encode()
-                .build()
-                .toUri();
-        log.info("uri = " + uri);
-        System.out.println(token);
-        // HttpHeaders 객체 생성
-        HttpHeaders headers = new HttpHeaders();
-        // 토큰 값을 "Authorization" 헤더에 추가
-        headers.set("Authorization", token);
-        ResponseEntity<List<OrderResponseDto>> responseEntity = restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                // 헤더를 포함한 HttpEntity 객체 전달
-                new HttpEntity<>(headers),
-                new ParameterizedTypeReference<List<OrderResponseDto>>() {}
-        );
-        return responseEntity.getBody();
-    }
+
 }

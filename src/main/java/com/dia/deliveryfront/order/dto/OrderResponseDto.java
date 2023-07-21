@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 public class OrderResponseDto {
+    private String orderId;
     private String storeName;
     private List<ProductResponseDto> productResponseDtos;
     private String username;

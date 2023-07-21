@@ -123,8 +123,8 @@ function doStoreSave() {
             alert("저장에 성공하였습니다.");
             window.location.href = host;
         })
-        .fail(function (jqXHR, textStatus) {
-            alert("Login Fail");
+        .fail(function (res, jqXHR, textStatus) {
+            alert(res.responseText);
         });
 
 }
