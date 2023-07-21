@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 // 가게 등록
 function doStoreSave() {
-    
     var store = {
         name: "",
         category: "",
@@ -124,7 +123,7 @@ function doStoreSave() {
             window.location.href = host;
         })
         .fail(function (res, jqXHR, textStatus) {
-            alert(res.responseText);
+            alert(res.responseJSON.msg);
         });
 
 }

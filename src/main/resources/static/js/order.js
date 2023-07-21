@@ -93,11 +93,10 @@ $(document).ready(function () {
                 data: JSON.stringify(requestData),
                 success: function (data) {
                     alert("주문 생성 완료")
-                    console.log("Order placed successfully!");
                     window.location.reload()
                 },
                 error: function (res, error) {
-                    alert(res.responseText);
+                    alert(res.responseJSON.msg);
                     console.error("Error placing order:", error);
                 },
             });
