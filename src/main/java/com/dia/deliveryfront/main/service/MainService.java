@@ -1,7 +1,6 @@
 package com.dia.deliveryfront.main.service;
 
 import com.dia.deliveryfront.store.dto.StoreResponseDto;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
