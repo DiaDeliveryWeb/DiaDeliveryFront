@@ -1,4 +1,8 @@
-
+let scrapNum;
+let reviewNum;
+let imageUrl;
+let email;
+let introduction;
 $(document).ready(function () {
     const auth = getToken();
     if (auth !== undefined && auth !== '') {
@@ -6,10 +10,29 @@ $(document).ready(function () {
             jqXHR.setRequestHeader('Authorization', auth);
         });
     }
+    $.ajax({
+        type: "GET",
+        url: (otherHost + `/profile`),
+        contentType: "application/json",
+    })
+        .done(function (res, status, xhr) {
+            scrapNum = res.scrapNum;
+            reviewNum = res.reviewNum;
+            imageUrl = res.imageUrl;
+            email = res.email;
+            introduction = res.introduction;
+
+        })
+        .fail(function (res, jqXHR, textStatus) {
+            alert(res.responseJSON.msg);
+        });
+
     getOrders();
+    $("#scrapItem").click(function () {
+        moveScrapStoresPage();
+    });
 
-
-    $("#myStores").click(function() {
+    $("#myStoresItem").click(function () {
         moveMyStoresPage();
     });
 
@@ -60,17 +83,26 @@ function displayOrderData(orderData) {
         let username = order.username;
         let orderNum = order.orderNum;
         let totalPrice = 0;
-        if (orderStatus === '주문생성'){
+        if (orderStatus === '주문생성') {
             createdOrderCnt += 1;
-        } else if(orderStatus === '주문완료'){
+        } else if (orderStatus === '주문완료') {
             doneOrderCnt += 1;
-        } else{
+        } else {
             canceledOrderCnt += 1;
         }
         let scrapElement = document.getElementById('scrap');
         scrapElement.innerText = scrapNum;
         let reviewElement = document.getElementById('review');
         reviewElement.innerText = reviewNum;
+        if (imageUrl !== null) {
+            $("#userProfileImage").attr("src", imageUrl);
+        }
+        $("#userProfileEmail").text(email);
+        if (introduction !== null) {
+            $("#userProfileIntroduction").text(introduction);
+        }
+
+        toggleElementsBasedOnRole(role);
 
         htmlContent += `<div class="orderCardOne">
             <div>
@@ -106,12 +138,12 @@ function displayOrderData(orderData) {
                         <p>${description}</p>
                     </div>
                 </div>
-                </div>
             `;
         });
 
         htmlContent += `
             <h4>총액: ${totalPrice}</h4>
+            </div>
             </div>
         `;
     });
@@ -149,7 +181,8 @@ function cancelOrder(orderNum){
             alert(res.responseJSON.msg);
         });
 }
-function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt){
+
+function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt) {
     let createdElement = document.getElementById('created');
     createdElement.innerText = createdOrderCnt;
     let doneElement = document.getElementById('done');
@@ -158,6 +191,37 @@ function orderStatus(createdOrderCnt, doneOrderCnt, canceledOrderCnt){
     canceledElement.innerText = canceledOrderCnt;
 }
 
+// 유저의 권한에 따라 요소를 보이거나 감추는 함수
+function toggleElementsBasedOnRole(role) {
+    // scrap은 USER인 경우에만 나타남
+    const scrapItem = document.getElementById("scrapItem");
+    if (role === "USER") {
+        scrapItem.style.display = "block";
+    } else {
+        scrapItem.style.display = "none";
+    }
+
+    // review는 USER인 경우에만 나타남
+    const reviewItem = document.getElementById("reviewItem");
+    if (role === "USER") {
+        reviewItem.style.display = "block";
+    } else {
+        reviewItem.style.display = "none";
+    }
+
+    // myStores는 OWNER인 경우에만 나타남
+    const myStoresItem = document.getElementById("myStoresItem");
+    if (role === "OWNER") {
+        myStoresItem.style.display = "block";
+    } else {
+        myStoresItem.style.display = "none";
+    }
+}
+
+
+function moveScrapStoresPage() {
+    window.location.href = host + '/stores/scrap';
+}
 
 function moveMyStoresPage() {
     window.location.href = host + '/stores/mystoreslist';

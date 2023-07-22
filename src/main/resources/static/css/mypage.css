@@ -231,3 +231,15 @@ div{
     font-size: 14px;
 }
 
+.profileInfo {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.profileInfoTitle::after {
+    content: ": ";
+    margin-left: 5px;
+}
+.profileInfoContent {
+    white-space: nowrap;
+}

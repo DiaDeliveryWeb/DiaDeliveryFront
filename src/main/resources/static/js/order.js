@@ -1,29 +1,26 @@
-
-function openTab(tabName) {
-    var i, tabContent, tabButtons;
-
-    // 모든 탭 컨텐츠 숨기기
-    tabContent = document.getElementsByClassName("tab-content");
-    for (i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-    }
-
-    // 모든 탭 버튼 비활성화
-    tabButtons = document.getElementsByClassName("tab-button");
-    for (i = 0; i < tabButtons.length; i++) {
-        tabButtons[i].classList.remove("active");
-    }
-
-    // 선택한 탭 컨텐츠 보여주기
-    document.getElementById(tabName).style.display = "block";
-
-    // 선택한 탭 버튼 활성화
-    event.currentTarget.classList.add("active");
-}
-
 $(document).ready(function () {
     // jQuery to handle the cart functionality
     const cartItems = [];
+    console.log(reviewsData)
+    // const reviews = JSON.parse(reviewsData);
+
+    // 별점과 함께 별 개수를 표시할 요소 선택
+    const starsContainer = $(".rating");
+
+    // 별점 계산 함수 호출하여 평균 별점 가져오기
+    const averageRating = calculateRating(reviewsData);
+
+    // 별점을 별 아이콘으로 변환하여 starsContainer에 추가
+    for (let i = 1; i <= 5; i++) {
+        const starIcon = $("<i>").addClass("fas fa-star");
+        if (i <= averageRating) {
+            starIcon.addClass("checked");
+        }
+        starsContainer.append(starIcon);
+    }
+
+    // 별점 개수도 함께 표시
+    starsContainer.prepend(`<span>평점: ${averageRating} / 5</span>`);
 
     // Event handler for the "담기" button
     $(".add-to-cart-button").on("click", function () {
@@ -39,6 +36,7 @@ $(document).ready(function () {
 
         addToCart(productId, productName, price);
     });
+
     $("#starRating i").on("click", function () {
         let rating = $(this).data("rating");
         let stars = $("#starRating i");
@@ -113,30 +111,68 @@ $(document).ready(function () {
 
 });
 
-function submitReview() {
-    // 작성한 리뷰 데이터를 FormData 객체로 생성하여 서버로 전송
-    let formData = new FormData();
-    let image = $("#reviewImage")[0].files[0];
-    let content = $("#reviewContent").val();
-    let rate = $("#reviewRating").val();
+function calculateRating(reviews) {
+    if (!reviews || reviews.length === 0) {
+        return 0;
+    }
+    // 리뷰 배열의 별점 합계 구하기
+    const totalRating = reviews.reduce((acc, review) => acc + review.rate, 0);
+    // 리뷰 배열의 평균 별점 구하기
+    const averageRating = totalRating / reviews.length;
+    // 평균 별점 반올림해서 소수점 첫째 자리까지 표시
+    return averageRating.toFixed(1);
+}
 
-    formData.append("image", image);
-    formData.append("content", content);
-    formData.append("rate", rate);
+function openTab(tabName) {
+    var i, tabContent, tabButtons;
 
+    // 모든 탭 컨텐츠 숨기기
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+
+    // 모든 탭 버튼 비활성화
+    tabButtons = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+    }
+
+    // 선택한 탭 컨텐츠 보여주기
+    document.getElementById(tabName).style.display = "block";
+
+    // 선택한 탭 버튼 활성화
+    event.currentTarget.classList.add("active");
+}
+
+function scrap(){
+    let storeId = store.storeId;
     $.ajax({
+        url: otherHost + "/scrap?storeId=" + storeId,
         type: "POST",
-        url: "/api/reviews", // 리뷰 저장 API 엔드포인트 주소
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            // 리뷰 저장 성공 시 화면 갱신 등 추가 작업 수행
-            alert("리뷰가 작성되었습니다.");
-            // 화면 갱신을 위한 코드 추가
+        contentType: "application/json",
+        success: function (data) {
+            alert("스크랩 완료")
+            window.location.reload()
         },
-        error: function(error) {
-            alert("리뷰 작성에 실패했습니다.");
-        }
+        error: function (res, error) {
+            alert(res.responseJSON.msg);
+        },
+    });
+}
+
+function cancelScrap(){
+    let storeId = store.storeId;
+    $.ajax({
+        url: otherHost + "/scrap?storeId=" + storeId,
+        type: "DELETE",
+        contentType: "application/json",
+        success: function (data) {
+            alert("스크랩 취소 완료")
+            window.location.reload()
+        },
+        error: function (res, error) {
+            alert(res.responseJSON.msg);
+        },
     });
 }

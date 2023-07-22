@@ -142,4 +142,6 @@ body {
 .stars i.checked {
     color: gold;
 }
-
+.rating i.checked {
+    color: gold;
+}

@@ -41,19 +41,48 @@
 <!-- Main -->
 <div id="main">
     <div class="wrap">
+        <!-- 프로필 정보를 보여주는 섹션 -->
+        <div class="profileContainer">
+            <!-- 프로필 이미지 -->
+            <div class="profileImageContainer">
+                <img id="userProfileImage" src="" alt="프로필 이미지" />
+            </div>
+            <!-- 프로필 정보 -->
+            <div class="profileInfoContainer">
+                <div class="profileInfo">
+                    <div class="profileInfoTitle">이메일</div>
+                    <div id="userProfileEmail" class="profileInfoContent"></div>
+                </div>
+                <div class="profileInfo">
+                    <div class="profileInfoTitle">소개 </div>
+                    <div id="userProfileIntroduction" class="profileInfoContent"></div>
+                </div>
+            </div>
+        </div>
         <div class="summaryContainer">
-            <div class="item">
+            <!-- scrap은 USER인 경우에만 나타남 -->
+            <div class="item" id="scrapItem" style="display: none; cursor: pointer;">
                 <div class="fancy-menu" id="scrap"></div>
                 <div>찜한상점</div>
             </div>
-            <div class="item">
+
+            <!-- review는 USER인 경우에만 나타남 -->
+            <div class="item" id="reviewItem" style="display: none;">
                 <div class="fancy-menu" id="review"></div>
                 <div>상점후기</div>
             </div>
-            <div class="item" style="cursor: pointer;" id="myStores">
+
+            <!-- myStores는 OWNER인 경우에만 나타남 -->
+            <div class="item" id="myStoresItem" style="display: none; cursor: pointer;">
                 <div class="fancy-menu"></div>
                 <div>나의상점목록</div>
             </div>
+        </div>
+        <div class="listContainer">
+            <a href="#" class="item">
+                <button id="my-page-btn-profile" onclick="onProfile()">프로필수정</button>
+                <button id="my-page-btn-store-save" onclick="onStoreSave()">가게등록</button>
+            </a>
         </div>
         <div class="shippingStatusContainer">
             <div class="title">
@@ -84,12 +113,6 @@
 
         </div>
         <div id="orderDataContainer"></div>
-        <div class="listContainer">
-            <a href="#" class="item">
-            <button id="my-page-btn-profile" onclick="onProfile()">프로필수정</button>
-            <button id="my-page-btn-store-save" onclick="onStoreSave()">가게등록</button>
-            </a>
-        </div>
     </div>
 
 </div>

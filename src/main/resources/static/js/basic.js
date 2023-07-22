@@ -2,8 +2,6 @@ const host = 'http://' + window.location.host;
 let targetId;
 const otherHost = 'http://localhost:8080';
 let role;
-let reviewNum;
-let scrapNum;
 let isOwner;
 $(document).ready(function () {
     const auth = getToken();
@@ -30,9 +28,6 @@ $(document).ready(function () {
             } else {
                 role = "USER"
             }
-            reviewNum = res.reviewNum;
-            scrapNum = res.scrapNum;
-            console.log(reviewNum,scrapNum, isOwner, role)
 
             if (!username) {
 

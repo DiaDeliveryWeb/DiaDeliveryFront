@@ -53,4 +53,9 @@ public class StoreController {
         model.addAttribute("products", productResponseDtos);
         return "store/myStore";
     }
+
+    @GetMapping("/scrap")
+    public String storesScrap(){
+        return "store/myScrapStore";
+    }
 }

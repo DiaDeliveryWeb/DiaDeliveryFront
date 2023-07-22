@@ -10,11 +10,76 @@
     <script src="/js/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/basic.js"></script>
+    <script src="/js/detailOrder.js"></script>
     <title>배달 사이트</title>
 </head>
+<style>
+    body {
+        position: relative;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .stars i.checked {
+        color: gold;
+    }
+    /* 카드 형태로 주문 내역을 표시하는 스타일 */
+
+    .orderCardOne {
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .orderCardContainer {
+        /*display: flex;*/
+        /*flex-wrap: wrap;*/
+        justify-content: space-between;
+    }
+
+    .orderCardOne {
+        display: flex;
+        flex-direction: row; /* 가로로 나란히 배치 */
+    }
+
+    .orderCard {
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        margin-bottom: 20px; /* 선택사항: OrderCard 사이에 간격을 추가 */
+        margin-right: 20px; /* 선택사항: OrderCard 사이에 간격을 추가 */
+    }
+
+    .orderCard img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    .orderCardContent {
+        text-align: center;
+    }
+
+    /* 글씨 크기를 조정합니다. */
+    .orderCard h4 {
+        font-size: 16px;
+    }
+
+    .orderCard p {
+        font-size: 14px;
+    }
+</style>
 <body>
 <div class="header" style="position:relative;">
     <div>
@@ -35,4 +100,35 @@
     <a id="login-text" href="javascript:logout()">
         로그아웃
     </a>
+</div>
+<!--// 주문정보-->
+<div id="orderDetailContainer"></div>
+<!--//리뷰-->
+<div class="review-form">
+    <h3>리뷰 작성하기</h3>
+    <div>
+        <div  id="reviewImageContainer"></div>
+        <label for="reviewImage">이미지 첨부:</label>
+        <input type="file" id="reviewImage" name="reviewImage">
+    </div>
+    <div>
+        <label for="reviewContent">리뷰 내용:</label>
+        <textarea id="reviewContent" name="reviewContent" rows="4" cols="50"></textarea>
+    </div>
+    <div>
+        <label>평점:</label>
+        <div class="stars" id="starRating">
+            <i class="far fa-star" data-action="fill" data-rating="1"></i>
+            <i class="far fa-star" data-action="fill" data-rating="2"></i>
+            <i class="far fa-star" data-action="fill" data-rating="3"></i>
+            <i class="far fa-star" data-action="fill" data-rating="4"></i>
+            <i class="far fa-star" data-action="fill" data-rating="5"></i>
+        </div>
+        <input type="hidden" id="reviewRating" name="reviewRating">
+    </div>
+    <div>
+        <button type="button" id="submitReviewBtn" onclick="submitReview()">리뷰 작성</button>
+        <button type="button" id="updateReviewBtn" onclick="updateReview()">리뷰 수정</button>
+        <button type="button" id="deleteReviewBtn" onclick="deleteReview()">리뷰 삭제</button>
+    </div>
 </div>

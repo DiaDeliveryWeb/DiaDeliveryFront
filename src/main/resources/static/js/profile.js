@@ -1,12 +1,21 @@
 $(document).ready(function () {
     // HTML 문서를 로드할 때마다 실행합니다.
     getProfile();
+    $("#profile-pic").on("change", function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $("#preview-image").attr("src", e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 })
 
 function getProfile() {
     $.ajax({
         type: "GET",
-        url: otherHost + '/users/info',
+        url: otherHost + '/profile',
         success: function (response) {
             let imageUrl = response['imageUrl'];
             let introduction = response['introduction'];
@@ -59,6 +68,7 @@ function loadProfile(imageUrl, introduction) {
     </section>`;
 
     $('#main').append(tempHtml);
+    // input 요소 변경 감지 및 미리보기 업데이트
 }
 function editProfile() {
     const inputElement = document.getElementById("profile-pic");
@@ -105,22 +115,3 @@ function onWithdrawal() {
         }
     });
 }
-
-// input 요소 변경 감지 및 미리보기 업데이트
-let inputElement = document.getElementById("profile-pic");
-let previewElement = document.getElementById("preview-image");
-
-inputElement.addEventListener("change", function () {
-    const file = inputElement.files[0];
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function (event) {
-            previewElement.src = event.target.result;
-        };
-
-        reader.readAsDataURL(file);
-    } else {
-        previewElement.src = "#";
-    }
-});
