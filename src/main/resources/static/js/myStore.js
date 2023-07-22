@@ -11,6 +11,25 @@ $(document).ready(function () {
     });
 });
 
+function deleteStore() {
+    let name = $("#hd_my_store_name").val()
+    let data = {"name": name};
+    $.ajax({
+        type: 'DELETE',
+        url: otherHost + `/stores?name=${name}`,
+        success: function (data, statusText, jqXHR) {
+            alert(data.msg);
+            window.location.href = host + '/stores/mystoreslist';
+        },
+        error: function (xhr, error, msg) {
+            alert(xhr.responseJSON.errorMsg);
+            window.location.reload();
+        }
+    })
+}
+function updateStore() {
+
+}
 function getStoreDetail() {
     let myStoreName = $('#hd_my_store_name').val();
     $.ajax({
