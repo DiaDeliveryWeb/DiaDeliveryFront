@@ -75,14 +75,12 @@ function displayOrderData(orderData) {
     // HTML 문자열로 데이터를 구성합니다.
     let htmlContent = '';
 
-    if (orderData.length ==0) {
-        // myStores는 OWNER인 경우에만 나타남
-        const myStoresItem = document.getElementById("myStoresItem");
-        if (role === "OWNER") {
-            myStoresItem.style.display = "block";
-        } else {
-            myStoresItem.style.display = "none";
-        }
+    // myStores는 OWNER인 경우에만 나타남
+    const myStoresItem = document.getElementById("myStoresItem");
+    if (role === "OWNER") {
+        myStoresItem.style.display = "block";
+    } else {
+        myStoresItem.style.display = "none";
     }
 
     // orderData 배열의 각 주문 정보를 순회하면서 HTML에 추가합니다.

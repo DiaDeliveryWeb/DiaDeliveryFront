@@ -28,6 +28,7 @@ $(document).ready(function () {
             } else {
                 role = "USER"
             }
+            console.log(role)
 
             if (!username) {
 

@@ -35,7 +35,7 @@
         <a href="javascript:window.history.back();" style="font-size: 40px;">⬅</a>
     </span>
     <span id="logo-left" style="cursor: pointer;">
-       <img src="/images/logo.png" />
+       <img src="/images/logo.png"/>
     </span>
     <span id="login-user-greet-text">
         <span id="username"></span> 님
@@ -57,77 +57,129 @@
             <div class="myStore-top">
                 <header>
                     <h2>가게상세</h2>
-                    <button type="button" class="remove-store dia-btn-gradient red small" onclick="deleteStore()">가게 삭제</button>
+                    <button type="button" class="remove-store dia-btn-gradient blue small" onclick="updateStore()">가게
+                        수정
+                    </button>
+                    <button type="button" class="remove-store dia-btn-gradient red small" onclick="deleteStore()">가게
+                        삭제
+                    </button>
                 </header>
             </div>
-            <form method="post" action="#">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="image">
-                            <img style="width:150px;height:150px;" th:src="${store.imageUrl}" />
-                        </div>
-                        <div class="name"><h6>이름</h6></div>
-                        <div class="col-6 col-12-mobile">
-                            <span id="st_name" name="name" th:text="${store.name}"></span>
-                        </div>
-                        <div><h6>설명</h6></div>
-                        <div><textarea id="st_introduction" name="introduction" th:text="${store.introduction}"></textarea></div>
-                        <div></div>
-                        <div><h6>카테고리</h6></div>
-                        <div><spna id="st_category" type="text" name="category" th:text="${store.category}"/></div>
-                        <div></div>
-                        <div><h6>주문상품 등록</h6></div>
-                        <div>
-                            <div style="display:inline">
-                                <div style="width:100px;">
-                                    <input type="button" value="-" class="qty_minus" field="quantity">
-                                    <input type="button" value="+" class="qty_plus" field="quantity">
-                                </div>
-                                <div style="width:1000px;" id="orderProducts">
-                                    <table id="products_table" style="border: solid 1px;">
-                                        <colgroup>
-                                            <col style="width:80px" />
-                                            <col style="width:400px" />
-                                            <col style="width:100px" />
-                                            <col style="width:80px" />
-                                            <col style="width:180px" />
-                                        </colgroup>
-                                        <thead>
-                                        <tr>
-                                            <th>순번</th>
-                                            <th>이미지</th>
-                                            <th>상품이름</th>
-                                            <th>가격</th>
-                                            <th>설명</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="tbProductList">
-                                            <tr th:each="product : ${products} ">
-                                                <td>
-                                                    <span th:text="${productStat.index}"></span>
-                                                    <input type="hidden" th:value="${product.id}" />
-                                                </td>
-                                                <td><a href="#"><img style="width:150px;height:150px;" th:src="${product.imageUrl}"></a></td>
-                                                <td><a href="#"><span th:text="${product.productName}"></span></a></td>
-                                                <td><span th:text="${product.price}"></span></td>
-                                                <td><span th:text="${product.description}"></span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="btn-container default-btn-container">
-                            <button id="store-update-button" type="button" class="dia-btn-gradient blue small" onclick="updateStore()">등록</button>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="image">
+                        <img style="width:150px;height:150px;" id="preview-image" th:src="${store.imageUrl}"/>
+                        <input type="file" id="image" name="image">
+                    </div>
+                    <div class="name"><h6>이름</h6></div>
+                    <div class="col-6 col-12-mobile">
+                        <input type="text" id="st_name" name="name" th:value="${store.name}">
+                    </div>
+                    <div><h6>소개</h6></div>
+                    <div>
+                        <textarea id="st_introduction" name="introduction" th:text="${store.introduction}"></textarea>
+                    </div>
+                </div>
+                <div></div>
+                <div><h6>카테고리</h6></div>
+                <div>
+                    <input type="text" id="st_category" name="category" th:value="${store.category}">
+                </div>
+                <div></div>
+                <div><h6>현재상품 목록</h6></div>
+                <div>
+                    <div style="display:inline">
+                        <div style="width:1000px;" id="orderProducts">
+                            <table id="products_table" style="border: solid 1px;">
+                                <colgroup>
+                                    <col style="width:80px"/>
+                                    <col style="width:400px"/>
+                                    <col style="width:100px"/>
+                                    <col style="width:80px"/>
+                                    <col style="width:180px"/>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>순번</th>
+                                    <th>이미지</th>
+                                    <th>상품이름</th>
+                                    <th>가격</th>
+                                    <th>설명</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbProductList">
+                                <tr th:each="product : ${products} ">
+                                    <td>
+                                        <span th:text="${productStat.index}"></span>
+                                        <input type="hidden" th:value="${product.id}"/>
+                                    </td>
+                                    <td>
+                                        <img style="width:150px;height:150px;" th:id="${'product-preview'} + product.id"
+                                             th:src="${product.imageUrl}">
+                                        <input type="file" class="product-image" th:id="${'product-image' + product.id}"
+                                               name="image" th:data-product-id="${product.id}">
+                                    </td>
+                                    <td><input type="text" th:id="${'product-name' + product.id}" name="name"
+                                               th:value="${product.productName}"></td>
+                                    <td><input type="text" th:id="${'product-price' + product.id}" name="price"
+                                               th:value="${product.price}"></td>
+                                    <td><textarea th:id="${'product-description' + product.id}" name="description"
+                                                  th:text="${product.description}"></textarea></td>
+                                    <td>
+                                        <button type="button" class="remove-store dia-btn-gradient blue small"
+                                                th:onclick="'updateProduct(' + ${product.id} + ')'">가게 수정
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="remove-store dia-btn-gradient red small"
+                                                th:onclick="'deleteProduct(' + ${product.id} + ')'">상품 삭제
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="col-1"></div>
                 </div>
-            </form>
+                <div><h6>상품 추가</h6></div>
+                <div>
+                    <div style="display:inline">
+                        <div style="width:100px;">
+                            <input type="button" value="-" class="qty_minus" field="quantity">
+                            <input type="button" value="+" class="qty_plus" field="quantity">
+                        </div>
+                        <div style="width:1000px;" id="addProducts">
+                            <table id="products_add_table" style="border: solid 1px;">
+                                <colgroup>
+                                    <col style="width:80px"/>
+                                    <col style="width:400px"/>
+                                    <col style="width:100px"/>
+                                    <col style="width:80px"/>
+                                    <col style="width:180px"/>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>순번</th>
+                                    <th>이미지</th>
+                                    <th>상품이름</th>
+                                    <th>가격</th>
+                                    <th>설명</th>
+                                </tr>
+                                </thead>
+                                <tbody id="addProductList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="dia-btn-gradient blue small"
+                        th:onclick="'addProducts('+${store.storeId}+')'">등록
+                </button>
+            </div>
+            <div class="col-1"></div>
         </div>
     </section>
-
 </div>
 </body>
 </html>

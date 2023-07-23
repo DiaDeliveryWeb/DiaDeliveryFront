@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 public class StoreOneResponseDto {
-    private String storeId;
+    private Long storeId;
     private String name;
     private String introduction;
     private String imageUrl;
