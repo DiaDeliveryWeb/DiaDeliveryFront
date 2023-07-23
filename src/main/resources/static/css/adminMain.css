@@ -61,3 +61,27 @@ header li {
     cursor: pointer;
     list-style-type: none;
 }
+
+.user-section {
+    flex-direction: column;
+    border: 1px solid #ccc; /
+    padding: 20px;
+
+}
+
+.name-section {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.user-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.user-btn:hover {
+    background-color: #0056b3;
+}
