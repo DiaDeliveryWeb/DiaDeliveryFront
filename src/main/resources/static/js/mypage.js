@@ -74,7 +74,17 @@ function displayOrderData(orderData) {
     let canceledOrderCnt= 0;
     // HTML 문자열로 데이터를 구성합니다.
     let htmlContent = '';
-    console.log(orderData)
+
+    if (orderData.length ==0) {
+        // myStores는 OWNER인 경우에만 나타남
+        const myStoresItem = document.getElementById("myStoresItem");
+        if (role === "OWNER") {
+            myStoresItem.style.display = "block";
+        } else {
+            myStoresItem.style.display = "none";
+        }
+    }
+
     // orderData 배열의 각 주문 정보를 순회하면서 HTML에 추가합니다.
     orderData.forEach((order) => {
         let orderStatus = order.orderStatus;
@@ -209,13 +219,13 @@ function toggleElementsBasedOnRole(role) {
         reviewItem.style.display = "none";
     }
 
-    // myStores는 OWNER인 경우에만 나타남
-    const myStoresItem = document.getElementById("myStoresItem");
+    // myStores는 OWNER인 경우에만 나타남 (반복문을 탈 필요없어 주석처리)
+/*    const myStoresItem = document.getElementById("myStoresItem");
     if (role === "OWNER") {
         myStoresItem.style.display = "block";
     } else {
         myStoresItem.style.display = "none";
-    }
+    }*/
 }
 
 

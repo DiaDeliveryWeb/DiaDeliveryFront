@@ -26,7 +26,6 @@ function getProfile() {
 
 function loadProfile(imageUrl, introduction) {
     let tempHtml = `    <!-- Contact -->
-    <section id="contact" class="four">
         <div class="container">
             <div class="co-body">
                 <header>
@@ -43,29 +42,26 @@ function loadProfile(imageUrl, introduction) {
 
                             <input type="file" id="profile-pic" name="profilePic" accept="image/*">
 
-                            <div  class="col-13"><h6>나의 소개</h6></div>
+                            <div  class="col-12"><h4>나의 소개</h4></div>
                             <div class="col-12">
                                 <input type="text" id="introduction" name="introduction" placeholder="${introduction}">
                             </div>
 
-                            <div  class="col-13"><h6>비밀번호</h6></div>
+                            <div  class="col-12"><h4>비밀번호</h4></div>
                             <div class="col-12">
                                 <input type="password" id="password" name="password" placeholder="새 비밀번호">
                             </div>
 
-                            <div class="off-7">
-                                <button id="my-page-btn-submit" onclick="editProfile()">수정하기</button>
-                            </div>
-
-                            <div class="aln-left">
-                                <button id="my-page-btn-withdrawal" onclick="onWithdrawal()">회원탈퇴</button>
+                            <div class="btn-container profile-btn-container">
+                                <button id="my-page-btn-submit" class="dia-btn blue" onclick="editProfile()">수정하기</button>
+                                <button id="my-page-btn-withdrawal" class="dia-btn yellow" onclick="onWithdrawal()">회원탈퇴</button>
                             </div>
                         </div>
                         <div style="width:20%;"></div>
                     </div>
             </div>
         </div>
-    </section>`;
+    `;
 
     $('#main').append(tempHtml);
     // input 요소 변경 감지 및 미리보기 업데이트

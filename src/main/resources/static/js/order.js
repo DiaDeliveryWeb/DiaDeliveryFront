@@ -103,7 +103,7 @@ $(document).ready(function () {
 
 
     // Attach click event handler using jQuery
-    $(".order-button").on("click", function () {
+    $("#order-button").on("click", function () {
         sendCartToApi();
     });
 
