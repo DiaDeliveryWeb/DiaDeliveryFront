@@ -57,7 +57,7 @@
             <div class="myStore-top">
                 <header>
                     <h2>가게상세</h2>
-                    <button class="remove-store" onclick="deleteStore()">가게 삭제</button>
+                    <button type="button" class="remove-store dia-btn-gradient red small" onclick="deleteStore()">가게 삭제</button>
                 </header>
             </div>
             <form method="post" action="#">
@@ -118,10 +118,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" id="submit-buttons">
-                            <div>
-                                <button id="store-update-button" type="button" onclick="updateStore()">등록</button>
-                            </div>
+                        <div class="btn-container default-btn-container">
+                            <button id="store-update-button" type="button" class="dia-btn-gradient blue small" onclick="updateStore()">등록</button>
                         </div>
                     </div>
                     <div class="col-1"></div>

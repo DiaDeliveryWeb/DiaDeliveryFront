@@ -971,3 +971,212 @@ input[type=submit] {
 .signup-owner {
     margin-left: 100px;
 }
+
+/*
+일반 버튼 레이아웃
+*/
+.dia-btn, .dia-btn-two {
+    margin: 9px;
+}
+.dia-btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"],
+button[class*="btn"] {border: 0;}
+
+/* Here you can change the button sizes */
+.dia-btn.large,
+.dia-btn-two.large,
+.dia-btn-effect.large {
+    padding: 20px 40px;
+    font-size: 22px;
+}
+.dia-btn.small,
+.dia-btn-two.small,
+.dia-btn-gradient.small,
+.dia-btn-effect.small {
+    padding: 8px 18px;
+    font-size: 14px;
+}
+.dia-btn.mini,
+.dia-btn-two.mini,
+.dia-btn-gradient.mini,
+.dia-btn-effect.mini {
+    padding: 4px 12px;
+    font-size: 12px;
+}
+.dia-btn.block,
+.dia-btn-two.block,
+.dia-btn-gradient.block,
+.dia-btn-effect.block {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.dia-btn-gradient.large {
+    padding: 15px 45px;
+    font-size: 22px;
+}
+
+/* Colors for .dia-btn and .dia-btn-two */
+.dia-btn.blue, .dia-btn-two.blue     {background-color: #7fb1bf;}
+.dia-btn.green, .dia-btn-two.green   {background-color: #9abf7f;}
+.dia-btn.red, .dia-btn-two.red       {background-color: #fa5a5a;}
+.dia-btn.purple, .dia-btn-two.purple {background-color: #cb99c5;}
+.dia-btn.cyan, .dia-btn-two.cyan     {background-color: #7fccde;}
+.dia-btn.yellow, .dia-btn-two.yellow {background-color: #f0d264;}
+
+.rounded {
+    border-radius: 10px;
+}
+
+/* default button style */
+.dia-btn {
+    position: relative;
+    border: 0;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    width:110px;
+    height:40px;
+}
+.dia-btn:active {
+    top: 4px;
+}
+
+/* color classes for .dia-btn */
+
+.dia-btn-container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+    display: inline-block;
+}
+
+.dia-btn.blue {box-shadow: 0px 4px #74a3b0;}
+.dia-btn.blue:active {box-shadow: 0 0 #74a3b0; background-color: #709CA8;}
+
+.dia-btn.green {box-shadow: 0px 4px 0px #87a86f;}
+.dia-btn.green:active {box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+
+.dia-btn.red {box-shadow:0px 4px 0px #E04342;}
+.dia-btn.red:active {box-shadow: 0 0 #ff4c4b; background-color: #ff4c4b;}
+
+.dia-btn.purple {box-shadow:0px 4px 0px #AD83A8;}
+.dia-btn.purple:active {box-shadow: 0 0 #BA8CB5; background-color: #BA8CB5;}
+
+.dia-btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.dia-btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+.dia-btn.yellow {box-shadow:0px 4px 0px #D1B757;}
+.dia-btn.yellow:active {box-shadow: 0 0 #ff4c4b; background-color: #D6BB59;}
+
+/* Gradient buttons */
+.dia-btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+/* Gradient - ugly css is ugly */
+.dia-btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+.dia-btn-gradient.red{
+    background: rgba(250,90,90,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(250,90,90,1)), to(rgba(232,81,81,1)));
+    background: -webkit-linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
+    background: -moz-linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
+    background: -o-linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
+    background: linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5a5a', endColorstr='#e85151', GradientType=0 );
+}
+.dia-btn-gradient.orange {
+    background: rgba(255,105,30,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,105,30,1)), to(rgba(230,95,28,1)));
+    background: -webkit-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+    background: -moz-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+    background: -o-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+    background: linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+}
+.dia-btn-gradient.blue {
+    background: rgba(102,152,203,1);
+    background: -moz-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(102,152,203,1)), color-stop(100%, rgba(92,138,184,1)));
+    background: -webkit-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+    background: -o-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+    background: -ms-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+    background: linear-gradient(to bottom, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6698cb', endColorstr='#5c8ab8', GradientType=0 );
+}
+.dia-btn-gradient.purple {
+    background: rgba(203,153,197,1);
+    background: -moz-linear-gradient(top, rgba(203,153,197,1) 0%, rgba(181,134,176,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(203,153,197,1)), color-stop(100%, rgba(181,134,176,1)));
+    background: -webkit-linear-gradient(top, rgba(203,153,197,1) 0%, rgba(181,134,176,1) 100%);
+    background: -o-linear-gradient(top, rgba(203,153,197,1) 0%, rgba(181,134,176,1) 100%);
+    background: -ms-linear-gradient(top, rgba(203,153,197,1) 0%, rgba(181,134,176,1) 100%);
+    background: linear-gradient(to bottom, rgba(203,153,197,1) 0%, rgba(181,134,176,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb99c5', endColorstr='#b586b0', GradientType=0 );
+}
+.dia-btn-gradient.yellow {
+    background: rgba(240,210,100,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(240,210,100,1)), to(rgba(229,201,96,1)));
+    background: -webkit-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+    background: -moz-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+    background: -o-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+    background: linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0d264', endColorstr='#e5c960', GradientType=0 );
+}
+.dia-btn-gradient.green {
+    background: rgba(130,200,160,1);
+    background: -moz-linear-gradient(top, rgba(130,200,160,1) 0%, rgba(130,199,158,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(130,200,160,1)), color-stop(100%, rgba(130,199,158,1)));
+    background: -webkit-linear-gradient(top, rgba(130,200,160,1) 0%, rgba(130,199,158,1) 100%);
+    background: -o-linear-gradient(top, rgba(130,200,160,1) 0%, rgba(130,199,158,1) 100%);
+    background: -ms-linear-gradient(top, rgba(130,200,160,1) 0%, rgba(130,199,158,1) 100%);
+    background: linear-gradient(to bottom, rgba(130,200,160,1) 0%, rgba(124, 185, 149, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82c8a0', endColorstr='#82c79e', GradientType=0 );
+}
+
+.dia-btn-gradient.red:active    {background: #E35252;}
+.dia-btn-gradient.orange:active {background: #E8601B;}
+.dia-btn-gradient.cyan:active   {background: #169499;}
+.dia-btn-gradient.blue:active   {background: #608FBF;}
+.dia-btn-gradient.purple:active {background: #BD8EB7;}
+.dia-btn-gradient.yellow:active {background: #DBC05B;}
+.dia-btn-gradient.green:active  {background: #72B08E;}
+
+
+/*
+container 공통속성
+*/
+.container {
+
+    width:50%;
+    text-align: center;
+}
+/* 버튼 컨테이너 너비는 페이지마다 다름 */
+.default-btn-container {
+    width:260px;
+}
+
+
+.data-close {display:inline-block;*display:inline;}
+.data-close:after {display: inline-block;content: "\00d7"; font-size:15pt;}
