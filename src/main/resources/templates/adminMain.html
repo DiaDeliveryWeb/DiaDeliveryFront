@@ -9,15 +9,26 @@
 </head>
 <body>
 <header>
-      <nav>
-          <li onclick="openAdmin('menu')">User</li>
-          <li onclick="openAdmin('info')">Order</li>
-          <li onclick="openAdmin('review')">Review</li>
-      </nav>
+    <nav>
+        <li onclick="openUser()">User</li>
+        <li onclick="openOrder()">Order</li>
+        <li onclick="openReview()">Review</li>
+    </nav>
 </header>
 
 <section class="main-section">
+    <div class="user-section" style="display: none">
+        <div class="name-section">
+            name
+        </div>
+        <button class="user-btn">권한 수정</button>
+    </div>
+    <div class="order-section" style="display: none">
 
+    </div>
+    <div class="review-section" style="display: none">
+
+    </div>
 </section>
 
 <footer>
@@ -25,3 +36,45 @@
 </footer>
 </body>
 </html>
+
+<!--<script>-->
+<!--    function openUser() {-->
+<!--        document.getElementsByClassName('user-section').innerHTML = users;-->
+<!--        // 'user-section' 클래스를 가진 요소를 보이도록 변경합니다.-->
+<!--        var userSection = document.querySelector('.user-section');-->
+<!--        userSection.style.display = 'block';-->
+
+<!--        // 다른 섹션들은 숨깁니다.-->
+<!--        var orderSection = document.querySelector('.order-section');-->
+<!--        orderSection.style.display = 'none';-->
+
+<!--        var reviewSection = document.querySelector('.review-section');-->
+<!--        reviewSection.style.display = 'none';-->
+<!--    }-->
+
+<!--    function openOrder() {-->
+<!--        // 'order-section' 클래스를 가진 요소를 보이도록 변경합니다.-->
+<!--        var orderSection = document.querySelector('.order-section');-->
+<!--        orderSection.style.display = 'block';-->
+
+<!--        // 다른 섹션들은 숨깁니다.-->
+<!--        var userSection = document.querySelector('.user-section');-->
+<!--        userSection.style.display = 'none';-->
+
+<!--        var reviewSection = document.querySelector('.review-section');-->
+<!--        reviewSection.style.display = 'none';-->
+<!--    }-->
+
+<!--    function openReview() {-->
+<!--        // 'review-section' 클래스를 가진 요소를 보이도록 변경합니다.-->
+<!--        var reviewSection = document.querySelector('.review-section');-->
+<!--        reviewSection.style.display = 'block';-->
+
+<!--        // 다른 섹션들은 숨깁니다.-->
+<!--        var userSection = document.querySelector('.user-section');-->
+<!--        userSection.style.display = 'none';-->
+
+<!--        var orderSection = document.querySelector('.order-section');-->
+<!--        orderSection.style.display = 'none';-->
+<!--    }-->
+<!--</script>-->

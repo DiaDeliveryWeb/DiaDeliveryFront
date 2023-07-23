@@ -21,7 +21,7 @@ $(document).ready(function () {
             imageUrl = res.imageUrl;
             email = res.email;
             introduction = res.introduction;
-
+            displayProfile();
         })
         .fail(function (res, jqXHR, textStatus) {
             alert(res.responseJSON.msg);
@@ -68,6 +68,27 @@ function onStoreSave() {
     window.location.href = host + '/stores/save';
 }
 
+function displayProfile(){
+    const myStoresItem = document.getElementById("myStoresItem");
+    if (role === "OWNER") {
+        myStoresItem.style.display = "block";
+    } else {
+        myStoresItem.style.display = "none";
+    }
+    let scrapElement = document.getElementById('scrap');
+    scrapElement.innerText = scrapNum;
+    let reviewElement = document.getElementById('review');
+    reviewElement.innerText = reviewNum;
+    if (imageUrl !== null) {
+        $("#userProfileImage").attr("src", imageUrl);
+    }
+    $("#userProfileEmail").text(email);
+    if (introduction !== null) {
+        $("#userProfileIntroduction").text(introduction);
+    }
+    toggleElementsBasedOnRole(role);
+}
+
 function displayOrderData(orderData) {
     let createdOrderCnt = 0;
     let doneOrderCnt = 0;
@@ -76,12 +97,6 @@ function displayOrderData(orderData) {
     let htmlContent = '';
 
     // myStores는 OWNER인 경우에만 나타남
-    const myStoresItem = document.getElementById("myStoresItem");
-    if (role === "OWNER") {
-        myStoresItem.style.display = "block";
-    } else {
-        myStoresItem.style.display = "none";
-    }
 
     // orderData 배열의 각 주문 정보를 순회하면서 HTML에 추가합니다.
     orderData.forEach((order) => {
@@ -98,19 +113,6 @@ function displayOrderData(orderData) {
         } else {
             canceledOrderCnt += 1;
         }
-        let scrapElement = document.getElementById('scrap');
-        scrapElement.innerText = scrapNum;
-        let reviewElement = document.getElementById('review');
-        reviewElement.innerText = reviewNum;
-        if (imageUrl !== null) {
-            $("#userProfileImage").attr("src", imageUrl);
-        }
-        $("#userProfileEmail").text(email);
-        if (introduction !== null) {
-            $("#userProfileIntroduction").text(introduction);
-        }
-
-        toggleElementsBasedOnRole(role);
 
         htmlContent += `<div class="orderCardOne">
             <div>
