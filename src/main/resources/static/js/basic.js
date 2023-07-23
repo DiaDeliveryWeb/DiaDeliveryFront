@@ -1,6 +1,8 @@
 const host = 'http://' + window.location.host;
 let targetId;
-const otherHost = 'http://localhost:8080';
+// const otherHost = 'http://localhost:8080';
+const otherHost = 'http://ec2-13-124-155-221.ap-northeast-2.compute.amazonaws.com';
+
 let role;
 let isOwner;
 $(document).ready(function () {
